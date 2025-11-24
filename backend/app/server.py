@@ -1,8 +1,8 @@
 from flask import Flask
-from auth.auth_routes import auth_bp
-from containers.containers_routes import containers_bp
-from projects.projects_routes import projects_bp
-from cleanup import start_cleanup_thread
+from app.auth.auth_routes import auth_bp
+from app.containers.containers_routes import containers_bp
+from app.projects.projects_routes import projects_bp
+from app.cleanup import start_cleanup_thread
 from flask_cors import CORS
 
 app = Flask(__name__)

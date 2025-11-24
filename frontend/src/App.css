@@ -4,7 +4,7 @@
 .panel-content {
   padding: 32px 24px;
   flex: 1;
-  background:  #131313; /* #262627 */
+  background: #131313; /* #262627 */
   padding-bottom: 0 !important;
   margin-bottom: 0 !important;
   flex-grow: 1;
@@ -72,9 +72,18 @@
   font-size: 12px;
   color: #fff;
 }
-.status-yellow { background: #f59e0b; color: #000; }
-.status-green { background: #10b981; color: #fff; }
-.status-red { background: #ef4444; color: #fff; }
+.status-yellow {
+  background: #f59e0b;
+  color: #000;
+}
+.status-green {
+  background: #10b981;
+  color: #fff;
+}
+.status-red {
+  background: #ef4444;
+  color: #fff;
+}
 
 /* Tema claro para PanelPrincipal */
 .light-theme .panel-content {
@@ -108,20 +117,20 @@
   display: flex;
   flex-direction: column;
   height: 100vh;
-  font-family: 'Segoe UI', sans-serif;
-  
+  font-family: "Segoe UI", sans-serif;
+
   background-color: #131313;
   color: #f0f0f0;
-  transition: margin-left 0.7s cubic-bezier(0.77,0,0.175,1);
+  transition: margin-left 0.7s cubic-bezier(0.77, 0, 0.175, 1);
 }
 .app-container2 {
   display: flex;
   flex-direction: column;
   height: 100vh;
-  font-family: 'Segoe UI', sans-serif;
+  font-family: "Segoe UI", sans-serif;
   background-color: #131313;
   color: #bd2626;
-  transition: margin-left 0.7s cubic-bezier(0.77,0,0.175,1);
+  transition: margin-left 0.7s cubic-bezier(0.77, 0, 0.175, 1);
 }
 
 /* Navbar */
@@ -174,18 +183,18 @@
 .app-container {
   /* Quita el margin-left fijo */
   margin-left: 0;
-  transition: margin-left 0.2s cubic-bezier(0.4,0,0.2,1);
+  transition: margin-left 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .app-container.history-open {
   margin-left: 220px; /* Solo cuando el sidebar está abierto */
 }
 .side-menu.open {
-  animation: slideSidebarIn 0.7s cubic-bezier(0.77,0,0.175,1) both;
+  animation: slideSidebarIn 0.7s cubic-bezier(0.77, 0, 0.175, 1) both;
   transform: translateX(0);
 }
 .side-menu:not(.open) {
-  animation: slideSidebarOut 0.7s cubic-bezier(0.77,0,0.175,1) both;
+  animation: slideSidebarOut 0.7s cubic-bezier(0.77, 0, 0.175, 1) both;
   transform: translateX(-100%);
 }
 
@@ -208,7 +217,7 @@
   cursor: pointer;
   border-radius: 6px;
   transition: background 0.3s;
-  font-family: 'Segoe UI', sans-serif;
+  font-family: "Segoe UI", sans-serif;
   font-size: 14px;
 }
 .history-btn:hover {
@@ -222,15 +231,15 @@
   overflow: hidden;
   border-top: 1px solid #333;
   background: radial-gradient(ellipse, #3e4863 10%, #131313 100%);
-  transition: margin-left 0.7s cubic-bezier(0.77,0,0.175,1);
+  transition: margin-left 0.7s cubic-bezier(0.77, 0, 0.175, 1);
 }
 
 .main-content.slide-in {
-  animation: slideMainContentIn 0.7s cubic-bezier(0.77,0,0.175,1) both;
+  animation: slideMainContentIn 0.7s cubic-bezier(0.77, 0, 0.175, 1) both;
 }
 
 .main-content.slide-out {
-  animation: slideMainContentOut 0.7s cubic-bezier(0.77,0,0.175,1) both;
+  animation: slideMainContentOut 0.7s cubic-bezier(0.77, 0, 0.175, 1) both;
 }
 
 @keyframes slideMainContentIn {
@@ -264,8 +273,6 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
- 
-  
 }
 
 .query-input .buttons-row {
@@ -279,10 +286,10 @@
   height: 800px;
   background-color: #1c1c1c;
   color: #ffffff;
-  font-family: 'Segoe UI', sans-serif;
+  font-family: "Segoe UI", sans-serif;
   font-size: 17px;
   border: 1px solid #9b0018;
-  
+
   border-radius: 8px;
   padding: 10px;
   box-sizing: border-box;
@@ -314,7 +321,7 @@
 
 /* Mostrar siempre las primeras 10 líneas en el gutter, sin modificar el ancho */
 .sql-editor-container .cm-gutters::after {
-  content: '';
+  content: "";
   display: block;
   height: calc(1.5em * 10 - 100%);
   min-height: 0;
@@ -323,11 +330,11 @@
 /* Estilo para el cursor */
 .cm-cursor {
   border-left: 1.5px solid #ffffff;
-  background-color: transparent; /* Asegura que el fondo del cursor sea transparente */
-  width: 1.5px; /* Ancho del cursor */
+  background-color: transparent;
+  width: 1.5px;
 }
 
-/* Highlight para palabras clave (usa el tema por defecto y lo adapta) */
+/* Highlight para palabras clave */
 .cm-keyword {
   color: #00ff0d;
   font-weight: bold;
@@ -342,7 +349,6 @@
   font-style: italic;
 }
 
-
 .query-input button,
 .upload-btn {
   padding: 10px 20px;
@@ -352,7 +358,7 @@
   border-radius: 6px;
   cursor: pointer;
   transition: background 0.3s;
-  font-family: 'Segoe UI', sans-serif;
+  font-family: "Segoe UI", sans-serif;
   font-size: 14px;
 }
 .query-input button:hover,
@@ -381,7 +387,7 @@
   box-sizing: border-box;
   overflow-x: auto;
   overflow-y: auto;
-  background-color: #1c1c1c; 
+  background-color: #1c1c1c;
   border: 1px solid #9b0018;
   border-radius: 8px;
   margin: 10px 10px 0 10px;
@@ -392,10 +398,9 @@
 .results-panel table {
   min-width: max-content;
   border-collapse: collapse;
-  
+
   color: #fff;
 }
-
 
 .results-panel th,
 .results-panel td {
@@ -414,7 +419,7 @@
 /* Panel de errores */
 .errors-panel {
   height: 100px;
-  flex: none; 
+  flex: none;
   padding: 15px;
   box-sizing: border-box;
   overflow-y: auto;
@@ -424,7 +429,7 @@
   margin: 10px;
   margin-bottom: 58px;
   color: #ffffff;
-   box-shadow: 0 0 8px rgba(60, 165, 108, 0.2);
+  box-shadow: 0 0 8px rgba(60, 165, 108, 0.2);
 }
 
 /* Mensaje de éxito */
@@ -439,7 +444,7 @@
   box-sizing: border-box;
   width: 100%;
   min-height: 24px;
-  transition: min-height 0.3s cubic-bezier(0.4,0,0.2,1);
+  transition: min-height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .message-error {
@@ -453,14 +458,14 @@
   box-sizing: border-box;
   width: 100%;
   min-height: 24px;
-  transition: min-height 0.3s cubic-bezier(0.4,0,0.2,1);
+  transition: min-height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .main-content {
   display: flex;
   flex: 1;
   overflow: hidden;
-  transition: margin-left 0.7s cubic-bezier(0.77,0,0.175,1);
+  transition: margin-left 0.7s cubic-bezier(0.77, 0, 0.175, 1);
 }
 
 .left-panel {
@@ -488,31 +493,35 @@
 .resizer:hover {
   background-color: #888;
 }
+
 /* Para navegadores basados en WebKit (Chrome, Edge, Opera) */
 .results-panel::-webkit-scrollbar {
-  height: 14px; /* Altura del scrollbar horizontal */
-  width: 13px;  /* Ancho del scrollbar vertical */
-  
+  height: 14px;
+  width: 13px;
 }
 
 .results-panel::-webkit-scrollbar-track {
-  background: #1e1e2e; /* Color del track (fondo del scroll) */
+  background: #1e1e2e;
   border-radius: 100px;
 }
 
 .results-panel::-webkit-scrollbar-thumb {
-  background-color: #9b0018; /* Color del "botón" del scroll */
+  background-color: #9b0018;
   border-radius: 8px;
-  border: 3px solid #1e1e2e; /* Espacio entre el scroll y el fondo */
+  border: 3px solid #1e1e2e;
 }
 
 .results-panel::-webkit-scrollbar-thumb:hover {
-  background-color: #680010; /* Color más claro al pasar el mouse */
+  background-color: #680010;
 }
+
 /* Modal de subir CSV */
 .modal-bg {
   position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   background: rgba(24, 28, 39, 0.85);
   z-index: 1000;
   display: flex;
@@ -567,34 +576,22 @@
   font-size: 1em;
   margin-bottom: 10px;
   box-sizing: border-box;
-  /* Oculta el texto nativo en navegadores modernos, pero deja el botón visible */
-  /* Para Chrome/Webkit */
-  ::file-selector-button {
-    background: #9b0018;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    padding: 7px 16px;
-    font-family: 'Segoe UI', sans-serif;
-    font-size: 1em;
-    cursor: pointer;
-    transition: background 0.2s;
-  }
-  ::file-selector-button:hover {
-    background: #680010;
-  }
-  /* Para Firefox */
-  &::-ms-browse {
-    background: #9b0018;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    padding: 7px 16px;
-    font-family: 'Segoe UI', sans-serif;
-    font-size: 1em;
-    cursor: pointer;
-    transition: background 0.2s;
-  }
+}
+
+.modal input[type="file"]::file-selector-button {
+  background: #9b0018;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 7px 16px;
+  font-family: "Segoe UI", sans-serif;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.modal input[type="file"]::file-selector-button:hover {
+  background: #680010;
 }
 
 .modal textarea {
@@ -648,7 +645,7 @@
   border: 1.5px solid #9b0018;
   border-radius: 5px;
   margin-bottom: 10px;
-  font-family: 'Segoe UI', sans-serif;
+  font-family: "Segoe UI", sans-serif;
   transition: border 0.2s, box-shadow 0.2s;
   appearance: none;
 }
@@ -662,7 +659,7 @@
 
 /* Animación de desvanecimiento y desenfoque para el login exitoso */
 .login-bg.fade-out {
-  animation: fadeOutLoginSmooth 0.7s cubic-bezier(0.4,0,0.2,1) forwards;
+  animation: fadeOutLoginSmooth 0.7s cubic-bezier(0.4, 0, 0.2, 1) forwards;
   z-index: 2;
 }
 
@@ -671,7 +668,7 @@
   inset: 0;
   background: #000;
   opacity: 1;
-  animation: fadeOutBlack 0.4s 0.7s cubic-bezier(0.4,0,0.2,1) forwards;
+  animation: fadeOutBlack 0.4s 0.7s cubic-bezier(0.4, 0, 0.2, 1) forwards;
   z-index: 3;
   pointer-events: none;
 }
@@ -691,13 +688,13 @@
 }
 
 @keyframes fadeOutBlack {
-  0% { opacity: 1; }
-  100% { opacity: 0; }
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
 }
-
-
-
-
 
 /* Animación para mostrar el registro desde login */
 @keyframes slideInRegister {
@@ -711,34 +708,47 @@
   }
 }
 .login-form.show-register {
-  animation: slideInRegister 1s cubic-bezier(0.4,0,0.2,1);
+  animation: slideInRegister 1s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* Animación de salida para el registro */
 .hide-register {
-  animation: hideRegisterAnim 0.7s cubic-bezier(0.4,0,0.2,1) forwards;
+  animation: hideRegisterAnim 0.7s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 @keyframes hideRegisterAnim {
-  from { opacity: 1; transform: translate(-50%, -50%) scale(1);}
-  to   { opacity: 0; transform: translate(-50%, -60%) scale(0.9);}
+  from {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: translate(-50%, -60%) scale(0.9);
+  }
 }
 
 /* Animación para mostrar el login de forma suave */
 .login-form {
   opacity: 1;
-  transition: opacity 0.7s cubic-bezier(0.4,0,0.2,1), transform 0.7s cubic-bezier(0.4,0,0.2,1);
+  transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1), transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
 }
 .login-form.login-fade-in {
   opacity: 1;
   transform: translate(-50%, -50%) scale(1);
-  animation: loginFadeInAnim 0.7s cubic-bezier(0.4,0,0.2,1);
+  animation: loginFadeInAnim 0.7s cubic-bezier(0.4, 0, 0.2, 1);
 }
 @keyframes loginFadeInAnim {
-  from { opacity: 0; transform: translate(-50%, -40%) scale(0.95); }
-  to   { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+  from {
+    opacity: 0;
+    transform: translate(-50%, -40%) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
 }
 
-.message-error, .message-success {
+.message-error,
+.message-success {
   opacity: 1;
 }
 
@@ -747,7 +757,9 @@
   animation: fadeInMsg 0.4s forwards;
 }
 @keyframes fadeInMsg {
-  to { opacity: 1; }
+  to {
+    opacity: 1;
+  }
 }
 
 .fade-out-msg {
@@ -755,25 +767,34 @@
   animation: fadeOutMsg 0.5s forwards !important;
 }
 @keyframes fadeOutMsg {
-  to { opacity: 0; }
+  to {
+    opacity: 0;
+  }
 }
 
-/* Animación de entrada para el sidebar mejorada */
-/* @keyframes sidebarBounceGlowIn { ... } */
-
 /* --- SMOOTH THEME TRANSITIONS --- */
-body, .app-container, .navbar, .side-menu, .main-content, .results-panel, .errors-panel, .modal, .sql-editor-container .cm-editor, .left-panel, .right-panel {
-  transition: 
-    background 0.7s cubic-bezier(0.4,0,0.2,1),
-    background-color 0.7s cubic-bezier(0.4,0,0.2,1),
-    color 0.7s cubic-bezier(0.4,0,0.2,1),
-    border-color 0.7s cubic-bezier(0.4,0,0.2,1),
-    box-shadow 0.7s cubic-bezier(0.4,0,0.2,1);
+body,
+.app-container,
+.navbar,
+.side-menu,
+.main-content,
+.results-panel,
+.errors-panel,
+.modal,
+.sql-editor-container .cm-editor,
+.left-panel,
+.right-panel {
+  transition:
+    background 0.7s cubic-bezier(0.4, 0, 0.2, 1),
+    background-color 0.7s cubic-bezier(0.4, 0, 0.2, 1),
+    color 0.7s cubic-bezier(0.4, 0, 0.2, 1),
+    border-color 0.7s cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 0.7s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* Navbar smooth transition for background gradient */
 .navbar {
-  transition: background 0.7s cubic-bezier(0.4,0,0.2,1), color 0.7s cubic-bezier(0.4,0,0.2,1);
+  transition: background 0.7s cubic-bezier(0.4, 0, 0.2, 1), color 0.7s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* For CodeMirror gutter and highlights */
@@ -781,27 +802,37 @@ body, .app-container, .navbar, .side-menu, .main-content, .results-panel, .error
 .light-theme .sql-editor-container .cm-gutters,
 .light-theme .sql-editor-container .cm-activeLine,
 .light-theme .sql-editor-container .cm-gutterElement.cm-activeLineGutter {
-  transition: background 0.7s cubic-bezier(0.4,0,0.2,1), color 0.7s cubic-bezier(0.4,0,0.2,1), border-color 0.7s cubic-bezier(0.4,0,0.2,1);
+  transition: background 0.7s cubic-bezier(0.4, 0, 0.2, 1), color 0.7s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.7s
+    cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* Table cells and headers */
-.results-panel th, .results-panel td, .light-theme .results-panel th, .light-theme .results-panel td {
-  transition: background 0.7s cubic-bezier(0.4,0,0.2,1), color 0.7s cubic-bezier(0.4,0,0.2,1), border-color 0.7s cubic-bezier(0.4,0,0.2,1);
+.results-panel th,
+.results-panel td,
+.light-theme .results-panel th,
+.light-theme .results-panel td {
+  transition: background 0.7s cubic-bezier(0.4, 0, 0.2, 1), color 0.7s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.7s
+    cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* Sidebar smooth transition for box-shadow and border */
-.side-menu, .light-theme .side-menu {
-  transition: background 0.7s cubic-bezier(0.4,0,0.2,1), color 0.7s cubic-bezier(0.4,0,0.2,1), border-color 0.7s cubic-bezier(0.4,0,0.2,1), box-shadow 0.7s cubic-bezier(0.4,0,0.2,1);
+.side-menu,
+.light-theme .side-menu {
+  transition: background 0.7s cubic-bezier(0.4, 0, 0.2, 1), color 0.7s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.7s
+    cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.7s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* Modal smooth transition */
-.modal, .light-theme .modal {
-  transition: background 0.7s cubic-bezier(0.4,0,0.2,1), color 0.7s cubic-bezier(0.4,0,0.2,1), border-color 0.7s cubic-bezier(0.4,0,0.2,1);
+.modal,
+.light-theme .modal {
+  transition: background 0.7s cubic-bezier(0.4, 0, 0.2, 1), color 0.7s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.7s
+    cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* Tema claro */
-body.light-theme, .app-container.light-theme {
-  background-color: #e5e6ea !important; /* blanco grisáceo más oscuro */
+body.light-theme,
+.app-container.light-theme {
+  background-color: #e5e6ea !important;
   color: #323232 !important;
 }
 
@@ -809,7 +840,7 @@ body.light-theme, .app-container.light-theme {
   background-color: #fff !important;
   color: #323232 !important;
   border-right: 2px solid #e0e0e0;
-  box-shadow: 4px 0 24px 0 #000a; /* sombra oscura */
+  box-shadow: 4px 0 24px 0 #000a;
 }
 
 .light-theme .side-menu h3 {
@@ -892,13 +923,13 @@ body.light-theme, .app-container.light-theme {
   background: #f7f7fa !important;
 }
 
-.light-theme .side-menu .sidebar-host {
+.light-theme .toggle-history-btn {
   color: #111 !important;
 }
 
 /* Animación del icono de tema */
 .theme-anim {
-  animation: themeIconAnim 0.9s cubic-bezier(0.4,0,0.2,1) !important;
+  animation: themeIconAnim 0.9s cubic-bezier(0.4, 0, 0.2, 1) !important;
   display: inline-flex;
 }
 @keyframes themeIconAnim {
@@ -936,61 +967,6 @@ body.light-theme, .app-container.light-theme {
   }
 }
 
-/* Tooltip para columnas del sidebar */
-.sidebar-col-tooltip {
-  color: #fff;
-  cursor: default;
-  border-bottom: 1px dotted #9b0018;
-  position: relative;
-  transition: color 0.2s;
-}
-.sidebar-col-tooltip:hover {
-  color: #9b0018;
-}
-
-/* Personaliza el tooltip nativo (solo para navegadores modernos) */
-.sidebar-col-tooltip::-webkit-tooltip {
-  background: #131313;
-  color: #b6f2c5;
-  border-radius: 6px;
-  border: 1px solid #9b0018;
-  padding: 8px 12px;
-  font-size: 1em;
-  box-shadow: 0 2px 8px #000a;
-}
-
-/* Tooltip personalizado para columnas del sidebar */
-.custom-tooltip-trigger {
-  position: relative;
-  outline: none;
-}
-.custom-tooltip {
-  display: none;
-  position: fixed;
-  left: 0;
-  top: 0;
-  background: #131313;
-  color: #fff;
-  border-radius: 6px;
-  border: 1.5px solid #9b0018;
-  padding: 4px 10px;
-  font-size: 0.92em;
-  font-family: 'Segoe UI', sans-serif;
-  box-shadow: 0 4px 16px #000a;
-  white-space: nowrap;
-  z-index: 99999;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.18s cubic-bezier(0.4,0,0.2,1), transform 0.18s cubic-bezier(0.4,0,0.2,1);
-  pointer-events: none;
-}
-.custom-tooltip-trigger:hover .custom-tooltip,
-.custom-tooltip-trigger:focus .custom-tooltip {
-  display: block;
-  opacity: 1;
-  pointer-events: auto;
-}
-
 .light-theme .history-btn {
   background-color: #9b0018 !important;
   color: #fff;
@@ -1009,19 +985,6 @@ body.light-theme, .app-container.light-theme {
 .light-theme .history-btn.open:active,
 .light-theme .history-btn.open:hover,
 .light-theme .history-btn.open:focus {
-  background-color: #f3f3f6 !important;
-  color: #b8001e !important;
-}
-/* Refuerza para todos los estados combinados en tema claro */
-.light-theme .history-btn.active:active,
-.light-theme .history-btn.active:hover,
-.light-theme .history-btn.active:focus,
-.light-theme .history-btn.selected:active,
-.light-theme .history-btn.selected:hover,
-.light-theme .history-btn.selected:focus,
-.light-theme .history-btn[aria-expanded="true"]:active,
-.light-theme .history-btn[aria-expanded="true"]:hover,
-.light-theme .history-btn[aria-expanded="true"]:focus {
   background-color: #f3f3f6 !important;
   color: #b8001e !important;
 }
@@ -1059,25 +1022,6 @@ body.light-theme, .app-container.light-theme {
 .status-green {
   background: #00e676;
   color: #323232;
-}
-
-.modal-bg {
-  position: fixed;
-  inset: 0;
-  background: #000a;
-  z-index: 9999;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.modal {
-  background: #131313;
-  color: #fff;
-  border-radius: 12px;
-  padding: 32px 28px;
-  box-shadow: 0 4px 32px #000a;
-  min-width: 340px;
-  max-width: 90vw;
 }
 
 .footer {
@@ -1142,8 +1086,12 @@ body.light-theme, .app-container.light-theme {
 
 /* Animación de carga */
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 /* Estilos para el editor de Python */
@@ -1191,7 +1139,7 @@ body.light-theme, .app-container.light-theme {
 }
 
 .main-container.pinned-active {
-  margin-left: 220px; /* ancho sidebar pinneada */
+  margin-left: 220px;
 }
 .layout {
   display: flex;
@@ -1199,7 +1147,7 @@ body.light-theme, .app-container.light-theme {
 }
 
 .layout-pinned .content-area {
-  margin-left: 220px; /* desplazamiento cuando sidebar está fija */
+  margin-left: 220px;
 }
 
 .side-menu {
@@ -1219,25 +1167,16 @@ body.light-theme, .app-container.light-theme {
   z-index: 200;
 }
 
-/* Cuando se abre (aunque no esté pinneada) */
 .side-menu.open {
   left: 0;
 }
 
-/* Si está pinneada, se queda fija */
 .side-menu.pinned {
   left: 0;
 }
 
-/* Colapsada (solo íconos) */
 .side-menu.collapsed {
   width: 70px;
-}
-
-.sidebar-controls {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 10px;
 }
 
 .sidebar-controls button {
@@ -1270,5 +1209,3 @@ body.light-theme, .app-container.light-theme {
 .sidebar-list li:hover {
   background: #9b0018;
 }
-
-
