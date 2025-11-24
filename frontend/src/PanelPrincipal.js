@@ -4,7 +4,6 @@ import { useEffect, useState, useRef } from "react"
 import Informacion from "./Informacion"
 import "./App.css"
 import Login from "./Login"
-import CrearProyecto from "./CrearProyecto"
 import AgregarMicroservicio from "./AgregarMicroservicio"
 import EditarMicroservicio from "./EditarMicroservicio"
 
@@ -306,7 +305,7 @@ function PanelPrincipal() {
   }
   if (showAddMicroservice) {
     return (
-      <CrearProyecto
+      <AgregarMicroservicio
         onBack={() => {
           setShowAddMicroservice(false)
           refreshMicroservices() // Refrescar la lista cuando regresemos
