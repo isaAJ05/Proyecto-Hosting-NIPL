@@ -17,7 +17,6 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - ./traefik.yml:/etc/traefik/traefik.yml:ro
       - ./acme.json:/acme.json
-      - ./traefik_dynamic.yml:/etc/traefik/dynamic/traefik_dynamic.yml:ro
     networks:
       - traefik-net
 

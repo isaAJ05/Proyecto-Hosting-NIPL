@@ -1,0 +1,53 @@
+{
+  "5700f324": {
+    "id": "5700f324",
+    "name": "Juego Snake",
+    "repo": "https://github.com/RogerMarenco/snake-main.git",
+    "owner_email": "Invitado",
+    "owner_token_contract": "oak_demo_9a01cfb26f",
+    "dir": "C:\\Users\\USUARIO\\Downloads\\Proyecto-Hosting-NIPL\\backend\\app\\..\\deployed_projects\\5700f324",
+    "image": "project_5700f324:latest",
+    "container_id": "48ba541b7eed0cb54b1219fd11c96cf903fcc5ca27e4622668705e450351df07",
+    "subdomain": "Juego-Snake.Invitado.localhost",
+    "cpu": "0.5",
+    "memory": "256m",
+    "status": "running",
+    "created_at": "2025-12-01T23:23:29.357595+00:00",
+    "last_access": "2025-12-01T23:24:06.215428+00:00",
+    "last_started": "2025-12-01T23:23:29.357595+00:00"
+  },
+  "8c0fd369": {
+    "id": "8c0fd369",
+    "name": "React",
+    "repo": "https://github.com/isaAJ05/react.git",
+    "owner_email": "Invitado",
+    "owner_token_contract": "oak_demo_9a01cfb26f",
+    "dir": "C:\\Users\\USUARIO\\Downloads\\Proyecto-Hosting-NIPL\\backend\\app\\..\\deployed_projects\\8c0fd369",
+    "image": "project_8c0fd369:latest",
+    "container_id": "1fe8c7f0325897af5f307168a2e8e0b53ed038a5fa547d9e4a453f8b96b44bba",
+    "subdomain": "React.Invitado.localhost",
+    "cpu": "2",
+    "memory": "4000m",
+    "status": "running",
+    "created_at": "2025-12-01T23:24:07.440973+00:00",
+    "last_access": "2025-12-01T23:24:46.963548+00:00",
+    "last_started": "2025-12-01T23:24:07.440973+00:00"
+  },
+  "06878777": {
+    "id": "06878777",
+    "name": "Plantilla-Flask",
+    "repo": "https://github.com/isaAJ05/flask.git",
+    "owner_email": "Invitado",
+    "owner_token_contract": "oak_demo_9a01cfb26f",
+    "dir": "C:\\Users\\USUARIO\\Downloads\\Proyecto-Hosting-NIPL\\backend\\app\\..\\deployed_projects\\06878777",
+    "image": "project_06878777:latest",
+    "container_id": "dbf22fad9a300d90e36cc6d6d2c067f0f8cb0bcdadc7e632af250c04360676d9",
+    "subdomain": "Plantilla-Flask.Invitado.localhost",
+    "cpu": "2",
+    "memory": "512m",
+    "status": "running",
+    "created_at": "2025-12-01T23:28:33.744780+00:00",
+    "last_access": "2025-12-01T23:28:43.010398+00:00",
+    "last_started": "2025-12-01T23:28:33.744780+00:00"
+  }
+}

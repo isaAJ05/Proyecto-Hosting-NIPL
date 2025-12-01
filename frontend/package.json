@@ -9,8 +9,6 @@
     "eject": "react-scripts eject"
   },
   "dependencies": {
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
     "@codemirror/basic-setup": "^0.20.0",
     "@codemirror/gutter": "^0.19.9",
     "@codemirror/highlight": "^0.19.8",
@@ -31,7 +29,10 @@
     "ace-builds": "^1.42.0",
     "codemirror": "^6.0.2",
     "lucide-react": "^0.545.0",
+    "react": "^18.3.1",
     "react-ace": "^14.0.1",
+    "react-dom": "^18.3.1",
+    "react-scripts": "^5.0.1",
     "web-vitals": "^2.1.4"
   },
   "devDependencies": {
