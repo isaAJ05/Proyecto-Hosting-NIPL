@@ -1,5 +1,5 @@
 from flask import Blueprint, request, jsonify
-from models.project_models import create_project_from_repo, load_db, stop_project, start_project, project_status, touch_project, delete_project
+from models.project_models import create_project_from_repo, load_db, stop_project, start_project, project_status, touch_project, delete_project, _email_localpart
 
 projects_bp = Blueprint('projects_bp', __name__)
 
@@ -12,7 +12,8 @@ def list_projects():
     token_contract = request.headers.get('X-Token-Contract') or request.headers.get('x-token-contract')
     print("Listing projects for owner_email:", owner_email, "and token_contract:", token_contract)
     if owner_email:
-        filtered = {pid: p for pid, p in db.items() if p.get('owner_email') == owner_email and (token_contract is None or p.get('owner_token_contract') == token_contract)}
+        owner_lp = _email_localpart(owner_email)
+        filtered = {pid: p for pid, p in db.items() if p.get('owner_email') and _email_localpart(p.get('owner_email')) == owner_lp and (token_contract is None or p.get('owner_token_contract') == token_contract)}
         return jsonify(filtered)
     return jsonify(db)
 
@@ -79,7 +80,7 @@ def stop_project_route(project_id):
     p = db.get(project_id)
     if not p:
         return jsonify({'error': 'not found'}), 404
-    if p.get('owner_email') and owner_email and p.get('owner_email') != owner_email:
+    if p.get('owner_email') and owner_email and _email_localpart(p.get('owner_email')) != _email_localpart(owner_email):
         return jsonify({'error': 'forbidden'}), 403
     if p.get('owner_token_contract') and token_contract and p.get('owner_token_contract') != token_contract:
         return jsonify({'error': 'forbidden'}), 403
@@ -97,7 +98,7 @@ def start_project_route(project_id):
     p = db.get(project_id)
     if not p:
         return jsonify({'error': 'not found'}), 404
-    if p.get('owner_email') and owner_email and p.get('owner_email') != owner_email:
+    if p.get('owner_email') and owner_email and _email_localpart(p.get('owner_email')) != _email_localpart(owner_email):
         return jsonify({'error': 'forbidden'}), 403
     if p.get('owner_token_contract') and token_contract and p.get('owner_token_contract') != token_contract:
         return jsonify({'error': 'forbidden'}), 403
@@ -176,7 +177,7 @@ def delete_project_route(project_id):
     p = db.get(project_id)
     if not p:
         return jsonify({'error': 'not found'}), 404
-    if p.get('owner_email') and owner_email and p.get('owner_email') != owner_email:
+    if p.get('owner_email') and owner_email and _email_localpart(p.get('owner_email')) != _email_localpart(owner_email):
         return jsonify({'error': 'forbidden'}), 403
     if p.get('owner_token_contract') and token_contract and p.get('owner_token_contract') != token_contract:
         return jsonify({'error': 'forbidden'}), 403
