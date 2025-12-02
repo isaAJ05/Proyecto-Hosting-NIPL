@@ -733,7 +733,7 @@ function PanelPrincipal() {
                           <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
                             <div>{microservice.name}</div>
                             <div style={{ fontSize: 12, color: lightTheme ? '#444' : '#cfcfcf' }}>
-                              CPU: {microservice.cpu || '-'} • Mem: {microservice.memory || '-'} • RRRate: ...
+                              CPU: {microservice.cpu || '-'} • Mem: {microservice.memory || '-'} • Rate: ...
                             </div>
                           </div>
                         </td>
