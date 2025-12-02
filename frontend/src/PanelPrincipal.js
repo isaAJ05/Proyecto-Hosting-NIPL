@@ -3,6 +3,7 @@ import Informacion from "./Informacion"
 import "./App.css"
 import Login from "./Login"
 import CrearProyecto from "./CrearProyecto"
+import { useDocker } from "./DockerContext"
 
 function PanelPrincipal() {
   const [showInfoPage, setShowInfoPage] = useState(false)
@@ -25,7 +26,7 @@ function PanelPrincipal() {
     processing_type: "",
     code: "",
   })
-  const [dockerActive, setDockerActive] = useState(null) // verificacion
+  const { dockerActive, setDockerActive, verificarEstadoDocker } = useDocker()
   const [showCodeModal, setShowCodeModal] = useState(false)
   const [codeToShow, setCodeToShow] = useState("")
   // Estados de autenticación
@@ -101,20 +102,10 @@ function PanelPrincipal() {
     sessionStorage.setItem("lightTheme", lightTheme)
   }, [lightTheme])
 
-  // Consulta el estado de Docker al montar el componente
+  // Consulta el estado de Docker al montar el componente y cada vez que cambia isLoggedIn
   useEffect(() => {
-    console.log("Consultando estado de Docker...")
-    fetch("http://127.0.0.1:8000/containers/is_docker_active")
-      .then((res) => res.json())
-      .then((data) => {
-        console.log("Respuesta Docker:", data)
-        setDockerActive(data.active)
-      })
-      .catch((err) => {
-        console.error("Error consultando Docker:", err)
-        setDockerActive(false)
-      })
-  }, [])
+    verificarEstadoDocker()
+  }, [isLoggedIn])
 
   //CLIC FUERA DE SIDEBAR
   useEffect(() => {
@@ -154,6 +145,12 @@ function PanelPrincipal() {
       refreshMicroservices()
     } catch (e) {
       // refreshMicroservices estará definido después, el efecto también lo cubrirá
+    }
+    // Verificar estado de Docker inmediatamente después de iniciar sesión
+    try {
+      verificarEstadoDocker()
+    } catch (e) {
+      console.error("Error al verificar Docker tras login:", e)
     }
   }
 
