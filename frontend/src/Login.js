@@ -57,7 +57,7 @@ export default function Login({ isLoggedIn, setIsLoggedIn, handleLogin }) {
           display: isLoggedIn ? "none" : "flex",
           alignItems: "center",
           justifyContent: "center",
-          background: "none",
+          background: "#5b009b22",
           padding: "5px",
         }}
       >
@@ -96,7 +96,7 @@ export default function Login({ isLoggedIn, setIsLoggedIn, handleLogin }) {
               }}
             />
           </div>
-
+             
           <div
             style={{
               flex: "1",
@@ -105,6 +105,9 @@ export default function Login({ isLoggedIn, setIsLoggedIn, handleLogin }) {
               display: "flex",
               flexDirection: "column",
               justifyContent: "center",
+                   backgroundImage: `
+       radial-gradient(circle at center, #c4b5fd, transparent)
+     `,
             }}
           >
             <form
