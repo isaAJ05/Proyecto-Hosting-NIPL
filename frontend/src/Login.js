@@ -35,12 +35,13 @@ export default function Login({ isLoggedIn, setIsLoggedIn, handleLogin }) {
   return (
     <>
       <div
+        className="absolute inset-0 z-0"
         style={{
           position: "fixed",
           inset: 0,
           minHeight: "100vh",
           minWidth: "100vw",
-          background: "#131313",
+          background: "radial-gradient(125% 125% at 50% 10%, #000000 40%, #350136 100%)",
           zIndex: 0,
           pointerEvents: "none",
         }}
