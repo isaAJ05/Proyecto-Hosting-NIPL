@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  backend:
+    image: python:3.11-slim
+    container_name: proyecto_backend_dev
+    working_dir: /app
+    volumes:
+      - ./backend:/app:delegated
+    command: /bin/sh -c "pip install --no-cache-dir -r /app/requirements.txt && cd /app/app && python server.py"
+    ports:
+      - "8000:8000"
+    networks:
+      - traefik-net
+
+  frontend:
+    image: node:18
+    container_name: proyecto_frontend_dev
+    working_dir: /app
+    volumes:
+      - ./frontend:/app:delegated
+      - /app/node_modules
+    command: /bin/sh -c "npm install --silent && npm run start"
+    ports:
+      - "3000:3000"
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+
+networks:
+  traefik-net:
+    external: true
