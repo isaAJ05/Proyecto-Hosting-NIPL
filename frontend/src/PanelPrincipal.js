@@ -730,12 +730,15 @@ function PanelPrincipal() {
                   ) : (
                     microservices.map((microservice) => (
                       <tr key={microservice.id}>
-                        <td style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
-                          <div>{microservice.name}</div>
-                          <div style={{ fontSize: 12, color: lightTheme ? '#444' : '#cfcfcf' }}>
-                            CPU: {microservice.cpu || '-'} • Mem: {microservice.memory || '-'} • Rate: {microservice.rate_limit_per_minute ?? microservice.rate_limit ?? '-'} /min
-                          </div>
-                        </td>
+                        <td>
+  <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+    <div>{microservice.name}</div>
+    <div style={{ fontSize: 12, color: lightTheme ? '#444' : '#cfcfcf' }}>
+      CPU: {microservice.cpu || '-'} • Mem: {microservice.memory || '-'} • Rate: ...
+    </div>
+  </div>
+</td>
+
                         <td>
                           {microservice.subdomain ? (
                             <a
@@ -777,7 +780,7 @@ function PanelPrincipal() {
                               (microservice.last_access ? formatDuration(Date.now() - Date.parse(microservice.last_access)) : '-')
                           ) : '-'}
                         </td>
-                        <td style={{ display: "flex", gap: 6, alignItems: 'center' }}>
+                        <td style={{ display: "auto", gap: 6, alignItems: 'center' }}>
                         <button
                           className="action-btn"
                           title="Abrir Proyecto"
