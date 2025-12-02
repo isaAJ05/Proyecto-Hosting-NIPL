@@ -1,7 +1,14 @@
 # HOST ME ;)
 ### Proyecto realizado por:
 Isabella Arrieta, Natalia Carpintero, Roger Marenco, Paula Núñez y Luis Robles.
+# Enlace video de youtube
 
+---
+# Templates dockerizados
+- **Sitio estático:** https://github.com/RogerMarenco/snake-main.git
+- **Aplicación React:** https://github.com/isaAJ05/react.git
+- **Flask con plantillas HTML:** https://github.com/isaAJ05/flask.git
+---
 # Ejecución
 
 **Backend**

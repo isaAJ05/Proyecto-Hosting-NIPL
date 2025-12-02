@@ -424,74 +424,35 @@ function Informacion({ onBack, section, onSectionChange, isHistoryOpen, setIsHis
           style={{ padding: 32, maxWidth: 1200, margin: "0 auto", fontSize: 17, color: "#fff" }}
         >
           {/* DESCRIPCIÓN SECTION */}
-          {section === "descripcion" && (
-            <>
-              <h1 style={{ marginBottom: 10, color: "#ffffffff" }}>🍁 Host Me</h1>
-              <div style={{ display: "flex", gap: 8, flexWrap: "wrap", marginBottom: 18 }}>
-                <img
-                  src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white"
-                  alt="Docker"
-                />
-                <img
-                  src="https://img.shields.io/badge/Flask-000000?style=for-the-badge&logo=flask&logoColor=white"
-                  alt="Flask"
-                />
-                <img
-                  src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react&logoColor=black"
-                  alt="React"
-                />
-                <img
-                  src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white"
-                  alt="Python"
-                />
-                <img
-                  src="https://img.shields.io/badge/Roble-000000?style=for-the-badge&logoColor=white"
-                  alt="Roble"
-                />
-              </div>
-              <hr style={{ borderColor: "#5b009b", opacity: 3 }} />
-              <h2 style={{ color: "#ffffffff" }}>🪵 Descripción general</h2>
-              <p>
-                <b>Host Me</b> es una plataforma web que permite a los usuarios{" "}
-                <b>crear, editar, eliminar y listar microservicios</b> de manera segura y aislada, con{" "}
-                <b>autenticación Roble</b>, gestión de usuarios y <b>despliegue automático en contenedores Docker</b>.
-              </p>
-              <ul>
-                <li>
-                  <b>Frontend en React</b>
-                </li>
-                <li>
-                  <b>Backend en Flask</b>
-                </li>
-                <li>
-                  <b>Orquestación con Docker Compose</b>
-                </li>
-              </ul>
-              <p>
-                Cada usuario puede administrar <b>únicamente sus propios microservicios</b>, los cuales se ejecutan en
-                contenedores Docker independientes y validados automáticamente con Roble.
-              </p>
-              <>
-                <hr style={{ borderColor: "#5b009b", opacity: 3, marginTop: 24 }} />
-                <h2 style={{ color: "#ffffffff", marginTop: 24 }}>🏗️ Diagrama de Arquitectura</h2>
-               
-                  <div style={{ textAlign: "left", marginBottom: 12 }}>
-                    <p style={{ color: "#ffffffff", fontSize: 17, marginBottom: 24 }}>
-                      Diagrama de arquitectura de Host Me realizado en Enterprise Architect,
-                      mostrando la interacción entre el frontend, backend, Docker y Roble.
-                    </p>
+          {section  === "descripcion" && (
+        <div className="space-y-4">
+          <h2 className="text-2xl font-bold text-purple-400">Descripción General</h2>
+          <p className="text-gray-300 leading-relaxed">
+            <strong>Host Me</strong> es una plataforma completa diseñada para que cualquier usuario pueda desplegar,
+            gestionar y controlar microservicios de manera sencilla. El sistema permite crear proyectos que se ejecutan
+            dentro de contenedores Docker, asignarles un subdominio automático, monitorear su estado y gestionarlos con
+            acciones como iniciar, detener, reiniciar, actualizar y eliminar.
+          </p>
 
-                    <img
-                      src="/Diagrama_Arquitectura.png"
-                      alt="Diagrama de Arquitectura"
-                      style={{ maxWidth: "100%", height: "auto", borderRadius: 8, border: "2px solid #5b009b" }}
-                    />
-                  </div>
+          <h3 className="text-xl font-semibold text-purple-300">Características principales</h3>
+          <ul className="list-disc ml-6 space-y-2 text-gray-300">
+            <li>Despliegue automatizado de proyectos en contenedores Docker.</li>
+            <li>Asignación de subdominios mediante Traefik para acceso público.</li>
+            <li>Panel visual que muestra CPU, RAM, límites de rate, estado y tiempo en ejecución.</li>
+            <li>Sistema de autenticación por token con identificación de propietario de cada proyecto.</li>
+            <li>Interfaz intuitiva para gestionar y monitorear cada microservicio.</li>
+            <li>Backend robusto con Python, manejo de almacenamiento en SQLite y ejecución de Docker por API interna.</li>
+          </ul>
 
-               
-              </>
-            </>
-          )}
+          <h3 className="text-xl font-semibold text-purple-300">Arquitectura</h3>
+          <p className="text-gray-300 leading-relaxed">
+            La plataforma se compone de tres elementos principales:  
+            <strong>Frontend</strong> en React que consume las APIs;  
+            <strong>Backend</strong> en Python que administra proyectos, contenedores y lógica de negocio;  
+            y un <strong>Proxy reverso Traefik</strong> que recibe tráfico, enruta subdominios y gestiona certificados.
+          </p>
+        </div>
+      )}
 
           {/* INSTRUCCIONES SECTION */}
           {section === "instrucciones" && (
@@ -867,11 +828,15 @@ def main(data=None):
               <h3 style={{ color: "#ffffffff" }}>🤝 Créditos</h3>
               <p>Este proyecto fue desarrollado por:</p>
               <ul style={{ fontSize: 18, lineHeight: 2 }}>
+                
+                <li>
+                  <b>Isabella Arrieta</b>
+                </li>
                 <li>
                   <b>Natalia Carpintero</b>
                 </li>
                 <li>
-                  <b>Isabella Arrieta</b>
+                  <b>Roger Marenco</b>
                 </li>
                 <li>
                   <b>Paula Núñez</b>
