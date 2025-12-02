@@ -93,51 +93,40 @@ export default function Login({ isLoggedIn, setIsLoggedIn, handleLogin }) {
           >
             <form
               onSubmit={async e => {
-                e.preventDefault();
-                const user = loginUser.trim().toLowerCase();
-                const pass = loginPass.trim();
-                const token = tokenContract.trim();
-                setLoginError("");
+              e.preventDefault();
+              const user = loginUser.trim().toLowerCase();
+              const pass = loginPass.trim();
+              const token = tokenContract.trim();
+              setLoginError("");
 
-                try {
-                  const res = await fetch("http://127.0.0.1:5000/login", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({
-                      email: user,
-                      password: pass,
-                      token_contract: token,
-                    }),
-                  });
+              try {
+                const res = await fetch("http://127.0.0.1:5000/login", {
+                  method: "POST",
+                  headers: { "Content-Type": "application/json" },
+                  body: JSON.stringify({
+                    email: user,
+                    password: pass,
+                    token_contract: token,
+                  }),
+                });
 
-                  const data = await res.json();
-                  if (res.ok && data.accessToken) {
-                    sessionStorage.setItem("accessToken", data.accessToken);
-                    sessionStorage.setItem("tokenContract", token);
-                    sessionStorage.setItem("userPassword", pass); // Guardar contraseña
-                    handleLogin({ email: user });
-                    setIsLoggedIn(true);
-                    setLoginFade(false);
-                    console.log("Consultando estado de Docker...");
-                    fetch("http://127.0.0.1:8000/auth/loginis_docker_active")
-                      .then((res) => res.json())
-                      .then((data) => {
-                        console.log("Respuesta Docker:", data);
-                        setDockerActive(data.active);
-                      })
-                      .catch((err) => {
-                        console.error("Error consultando Docker:", err);
-                        setDockerActive(false);
-                      });
-                  } else {
-                    setLoginError(
-                      data.error || "Usuario o contraseña incorrectos"
-                    );
-                  }
-                } catch (err) {
-                  setLoginError("No se pudo conectar con el backend");
+                const data = await res.json();
+                if (res.ok && data.accessToken) {
+                  sessionStorage.setItem("accessToken", data.accessToken);
+                  sessionStorage.setItem("tokenContract", token);
+                  sessionStorage.setItem("userPassword", pass); // Guardar contraseña
+                  handleLogin({ email: user });
+                  setIsLoggedIn(true);
+                  setLoginFade(false);
+                } else {
+                  setLoginError(
+                    data.error || "Usuario o contraseña incorrectos"
+                  );
                 }
-              }}
+              } catch (err) {
+                setLoginError("No se pudo conectar con el backend");
+              }
+            }}
               style={{
                 display: showRegister ? "none" : "flex",
                 flexDirection: "column",
@@ -285,7 +274,7 @@ export default function Login({ isLoggedIn, setIsLoggedIn, handleLogin }) {
                       <circle cx="12" cy="12" r="3" />
                     </svg>
                   )}
-                </button>
+                </button>                
               </div>
 
               <div style={{ position: "relative", marginBottom: 4 }}>
@@ -403,17 +392,6 @@ export default function Login({ isLoggedIn, setIsLoggedIn, handleLogin }) {
                         handleLogin({ email: "Invitado" });
                         setIsLoggedIn(true);
                         setLoginFade(false);
-                        console.log("Consultando estado de Docker...");
-                        fetch("http://127.0.0.1:8000/auth/loginis_docker_active")
-                          .then((res) => res.json())
-                          .then((data) => {
-                            console.log("Respuesta Docker:", data);
-                            setDockerActive(data.active);
-                          })
-                          .catch((err) => {
-                            console.error("Error consultando Docker:", err);
-                            setDockerActive(false);
-                          });
                       } else {
                         setLoginError(data.error || "No se pudo iniciar sesión como invitado");
                       }

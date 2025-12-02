@@ -77,34 +77,8 @@ function PanelPrincipal() {
     const savedUser = sessionStorage.getItem("user")
     if (savedUser) {
       setUser(JSON.parse(savedUser))
-      setIsLoggedIn(true);
+      setIsLoggedIn(true)
     }
-    verificarEstadoDocker(setDockerActive);
-  }, [])
-
-  // Función reutilizable para verificar el estado de Docker
-  const verificarEstadoDocker = (setDockerActive) => {
-    console.log("Consultando estado de Docker...");
-    fetch("http://127.0.0.1:8000/auth/loginis_docker_active")
-      .then((res) => res.json())
-      .then((data) => {
-        console.log("Respuesta Docker:", data);
-        setDockerActive(data.active);
-      })
-      .catch((err) => {
-        console.error("Error consultando Docker:", err);
-        setDockerActive(false);
-      });
-  };
-
-  // Consulta el estado de Docker al montar el componente
-  useEffect(() => {
-    const savedUser = sessionStorage.getItem("user");
-    if (savedUser) {
-      setUser(JSON.parse(savedUser));
-      setIsLoggedIn(true);
-    }
-    verificarEstadoDocker(setDockerActive);
   }, [])
 
   useEffect(() => {
@@ -117,7 +91,20 @@ function PanelPrincipal() {
     sessionStorage.setItem("lightTheme", lightTheme)
   }, [lightTheme])
 
-
+  // Consulta el estado de Docker al montar el componente
+  useEffect(() => {
+    console.log("Consultando estado de Docker...")
+    fetch("http://127.0.0.1:8000/auth/loginis_docker_active")
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("Respuesta Docker:", data)
+        setDockerActive(data.active)
+      })
+      .catch((err) => {
+        console.error("Error consultando Docker:", err)
+        setDockerActive(false)
+      })
+  }, [])
 
   //CLIC FUERA DE SIDEBAR
   useEffect(() => {
@@ -268,8 +255,8 @@ function PanelPrincipal() {
         >
           <nav className="navbar">
             <button className="toggle-history-btn"
-              onClick={() => setIsHistoryOpen(!isHistoryOpen)}
-              title="Menú Info">
+            onClick={() => setIsHistoryOpen(!isHistoryOpen)}
+            title="Menú Info">
               {isHistoryOpen ? "☰" : "☰"}
             </button>
             <img
@@ -439,7 +426,7 @@ function PanelPrincipal() {
               </div>
             )}
           </nav>
-
+          
           <aside ref={sidebarRef} className={`side-menu${isHistoryOpen ? " open" : ""}`}>
             <div className="sidebar-controls">
               <button onClick={() => setIsHistoryOpen(!isHistoryOpen)} title={isHistoryOpen ? "Cerrar" : "Abrir"}>
@@ -447,7 +434,7 @@ function PanelPrincipal() {
               </button>
             </div>
             {isHistoryOpen && (
-
+              
               <ul className="sidebar-list">
                 {/* "Información" como texto normal */}
                 <div style={{
