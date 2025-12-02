@@ -529,13 +529,16 @@ function PanelPrincipal() {
                   fontSize: 16,
                   marginBottom: 8,
                   color: "#ffffffff",
-                  cursor: "default"  // Evita que cambie el cursor
+                  cursor: "default" // Evita que cambie el cursor
+                  
                 }}>
                   Información
                 </div>
 
                 <li
-                  style={{ cursor: "pointer", paddingLeft: 16 }}
+                   style={{ cursor: "pointer", paddingLeft: 16 }}
+  onMouseEnter={e => e.currentTarget.style.backgroundColor = "#7d05d354"}
+  onMouseLeave={e => e.currentTarget.style.backgroundColor = "transparent"}
                   onClick={() => {
                     setInfoSection("descripcion")
                     setShowInfoPage(true)

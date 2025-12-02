@@ -979,14 +979,14 @@ body.light-theme,
 .light-theme .history-btn[aria-expanded="true"],
 .light-theme .history-btn.selected {
   background-color: #f3f3f6 !important;
-  color: #b8001e !important;
+  color: #711182 !important;
 }
 .light-theme .history-btn.open,
 .light-theme .history-btn.open:active,
 .light-theme .history-btn.open:hover,
 .light-theme .history-btn.open:focus {
   background-color: #f3f3f6 !important;
-  color: #b8001e !important;
+  color: #711182 !important;
 }
 
 .panel-header-row {
@@ -1207,5 +1207,5 @@ body.light-theme,
 }
 
 .sidebar-list li:hover {
-  background: #5b009b;
+  background: #7d05d354;
 }
