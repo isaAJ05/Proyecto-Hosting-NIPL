@@ -81,16 +81,16 @@ export default function Login({ isLoggedIn, setIsLoggedIn, handleLogin }) {
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              padding: "35px 25px",
+              padding: "0px 10px",
             }}
           >
             <img
-              src="/red_logo_OS.png"
+              src="/hm_logoXMAS.png"
               alt="OAK Services Logo"
               style={{
                 maxWidth: "100%",
-                width: "280px",
-                height: "auto",
+                width: "400px",
+                height: "400px",
                 display: "block",
               }}
             />
@@ -159,7 +159,7 @@ export default function Login({ isLoggedIn, setIsLoggedIn, handleLogin }) {
                   letterSpacing: "-0.5px",
                 }}
               >
-                Iniciar sesión
+                Iniciar Sesión
               </h2>
 
               <div style={{ position: "relative", marginBottom: 4 }}>

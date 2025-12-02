@@ -21,6 +21,9 @@ function CrearProyecto({ onBack, lightTheme }) {
     }
   }
 
+  // Mostrar solo la parte local del email (antes de @) en la UI
+  const emailUserDisplay = (email || "usuario").split("@")[0].replace(/\s+/g, "") || "usuario"
+
   const [project, setProject] = useState({
     name: "",
     github_url: "",
@@ -41,22 +44,29 @@ function CrearProyecto({ onBack, lightTheme }) {
       name: "Sitio Estático (HTML/CSS/JS)",
       description:
         "Template para sitios web estáticos sin frameworks. Ideal para páginas de aterrizaje, portfolios y documentación.",
-      repository: "https://github.com/hosting-templates/html-static-template",
+      repository: "https://github.com/RogerMarenco/snake-main.git",
       structure: [
-        "📁 index.html - Página principal",
-        "📁 css/ - Estilos CSS",
-        "📁 js/ - Scripts JavaScript",
-        "📁 assets/ - Imágenes y recursos",
+        "📄 Dockerfile",
+        "📄 README.md",
+        "📄 index.html",
+        "📄 script.js",
+        "📄 styles.css",
       ],
       dockerfile: `FROM nginx:alpine
+
+# Copia todo el contenido del contexto de construcción al directorio de nginx
 COPY . /usr/share/nginx/html
+
+# Expone el puerto 80 (puerto interno del contenedor)
 EXPOSE 80
+
+# Ejecuta nginx en primer plano
 CMD ["nginx", "-g", "daemon off;"]`,
       instructions: [
         "1. Clona este template en tu repositorio de GitHub",
         "2. Modifica el contenido HTML/CSS/JS según tus necesidades",
         "3. Proporciona la URL de tu repositorio al crear el proyecto",
-        "4. El sistema creará automáticamente un contenedor con Nginx",
+        "4. El sistema creará automáticamente un contenedor con Traefik",
         "5. Tu sitio estará disponible en: nombreProyecto.nombreUsuario.localhost",
       ],
     },
@@ -64,24 +74,33 @@ CMD ["nginx", "-g", "daemon off;"]`,
       name: "Aplicación React",
       description:
         "Template para aplicaciones web modernas con React. Incluye configuración optimizada para desarrollo y producción.",
-      repository: "https://github.com/hosting-templates/react-template",
+      repository: "https://github.com/isaAJ05/react.git",
       structure: [
         "📁 src/ - Código fuente React",
         "📁 public/ - Recursos públicos",
         "📁 package.json - Dependencias",
         "📁 vite.config.js - Configuración Vite",
       ],
-      dockerfile: `FROM node:18-alpine AS build
+      dockerfile: `FROM node:18-slim AS build
 WORKDIR /app
+
+# Copiar archivos de dependencias primero para aprovechar cache de Docker
 COPY package*.json ./
-RUN npm install
-COPY . .
+
+# Usar npm ci si existe package-lock.json, si no cae back a npm install
+RUN if [ -f package-lock.json ]; then npm ci --silent; else npm install --silent; fi
+
+# Copiar el resto del código y construir
+COPY public ./public
+COPY src ./src
 RUN npm run build
 
-FROM nginx:alpine
-COPY --from=build /app/dist /usr/share/nginx/html
+FROM node:18-slim
+WORKDIR /app
+RUN npm install -g serve@14.1.2
+COPY --from=build /app/build ./build
 EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]`,
+CMD ["serve", "-s", "build", "-l", "80"]`,
       instructions: [
         "1. Clona este template en tu repositorio de GitHub",
         "2. Ejecuta 'npm install' para instalar dependencias",
@@ -91,29 +110,31 @@ CMD ["nginx", "-g", "daemon off;"]`,
       ],
     },
     nodejs: {
-      name: "Node.js + Express",
+      name: "Flask con plantillas HTML",
       description:
-        "Template para aplicaciones backend con Node.js y Express. Ideal para APIs REST y servicios web dinámicos.",
-      repository: "https://github.com/hosting-templates/nodejs-express-template",
+        "Template para aplicaciones con Flask que sirven páginas con plantillas Jinja2 y recursos estáticos. Ideal para sitios y microservicios ligeros.",
+      repository: "https://github.com/isaAJ05/flask.git",
       structure: [
-        "📁 server.js - Servidor Express",
-        "📁 routes/ - Rutas de la API",
-        "📁 controllers/ - Lógica de negocio",
-        "📁 package.json - Dependencias",
+        "📁 app.py - Punto de entrada de Flask (app)",
+        "📁 templates/ - Plantillas Jinja2 (HTML)",
+        "📁 static/ - Archivos estáticos (css, js, imágenes)",
+        "📁 requirements.txt - Dependencias Python",
       ],
-      dockerfile: `FROM node:18-alpine
+      dockerfile: `FROM python:3.11-slim
 WORKDIR /app
-COPY package*.json ./
-RUN npm install --production
+COPY requirements.txt ./
+RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
-EXPOSE 3000
-CMD ["node", "server.js"]`,
+ENV FLASK_ENV=production
+ENV FLASK_APP=app.py
+EXPOSE 80
+CMD ["gunicorn", "--bind", "0.0.0.0:80", "app:app"]`,
       instructions: [
         "1. Clona este template en tu repositorio de GitHub",
-        "2. Configura tus rutas y controladores",
-        "3. Define variables de entorno necesarias",
+        "2. Añade tus plantillas HTML en la carpeta templates/ y recursos en static/",
+        "3. Define dependencias en requirements.txt (Flask, gunicorn, etc.)",
         "4. Proporciona la URL de tu repositorio al crear el proyecto",
-        "5. Tu API estará disponible con reinicio automático",
+        "5. El sistema construirá la imagen y lanzará el contenedor (será accesible en el subdominio asignado)",
       ],
     },
   }
@@ -153,22 +174,27 @@ CMD ["node", "server.js"]`,
 
     try {
       const token = sessionStorage.getItem("accessToken")
+      const tokenContract = sessionStorage.getItem("tokenContract") || ""
 
-      const res = await fetch("http://127.0.0.1:5000/projects", {
+      // Construir subdominio usando solo la parte local del email (antes de @)
+      const emailUser = (email || 'Invitado').split('@')[0].replace(/\s+/g, '') || 'usuario'
+      const subdomain = `${project.name || 'proyecto'}.${emailUser}.localhost`
+
+      const res = await fetch("http://127.0.0.1:8000/projects/deploy", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
+        headers: Object.assign({ "Content-Type": "application/json" }, token ? { Authorization: `Bearer ${token}` } : {}),
         body: JSON.stringify({
-          project_name: project.name,
-          github_url: project.github_url,
-          template: project.template,
-          description: project.description,
+          name: project.name,
+          repo_url: project.github_url,
+          // `user` envía solo el nombre (parte antes de @). `owner_email` mantiene el correo completo.
+          user: emailUser || 'Invitado',
+          owner_email: email || 'Invitado',
+          token_contract: tokenContract,
+          subdomain: subdomain,
           cpu: Number.parseFloat(project.cpu),
-          memory: Number.parseInt(project.memory),
-          rate_limit: Number.parseInt(project.rate_limit),
-          user_email: email,
+          // En el backend `memory` se usa como mem_limit, espera algo como '512m'
+          memory: `${Number.parseInt(project.memory)}m`,
+          rate_limit_per_minute: Number.parseInt(project.rate_limit),
         }),
       })
 
@@ -180,7 +206,7 @@ CMD ["node", "server.js"]`,
           onBack() // Regresar al panel principal
         }, 2000)
       } else {
-        setError(data.error || "Error al crear el proyecto")
+        setError(data.error || (data.message || "Error al crear el proyecto"))
       }
     } catch (err) {
       setError("No se pudo conectar con el servidor")
@@ -241,7 +267,7 @@ CMD ["node", "server.js"]`,
             />
           </svg>
           <img
-            src="/red_logo_OSWIDTH.png"
+            src="/hm_logoWIDTH.png"
             alt="Logo Hosting"
             style={{ height: 44, marginLeft: 12, borderRadius: 12 }}
           />
@@ -530,7 +556,7 @@ CMD ["node", "server.js"]`,
                 >
                   Tu proyecto estará disponible en:{" "}
                   <strong>
-                    {project.name || "nombre"}.{email || "usuario"}.localhost
+                    {project.name || "nombre"}.{emailUserDisplay || "usuario"}.localhost
                   </strong>
                 </div>
               </div>
@@ -607,7 +633,7 @@ CMD ["node", "server.js"]`,
                   <option value="">Seleccionar template</option>
                   <option value="html-static">Sitio Estático (HTML/CSS/JS)</option>
                   <option value="react">Aplicación React</option>
-                  <option value="nodejs">Node.js + Express</option>
+                  <option value="nodejs">Flask con plantillas HTML</option>
                 </select>
                 <div
                   style={{
@@ -620,37 +646,7 @@ CMD ["node", "server.js"]`,
                 </div>
               </div>
 
-              {/* Descripción (opcional) */}
-              <div style={{ marginBottom: 16 }}>
-                <label
-                  style={{
-                    display: "block",
-                    marginBottom: 6,
-                    fontWeight: 500,
-                    fontSize: 13,
-                    color: lightTheme ? "#656d76" : "#8b949e",
-                  }}
-                >
-                  Descripción (opcional)
-                </label>
-                <textarea
-                  value={project.description}
-                  onChange={(e) => setProject((prev) => ({ ...prev, description: e.target.value }))}
-                  placeholder="Breve descripción de tu proyecto..."
-                  rows={3}
-                  style={{
-                    width: "95%",
-                    padding: "7px 10px",
-                    border: `1px solid ${lightTheme ? "#d1d9e0" : "#1c1c1c"}`,
-                    borderRadius: 4,
-                    background: lightTheme ? "#fff" : "#1c1c1c",
-                    color: lightTheme ? "#1f2328" : "#e6edf3",
-                    fontSize: 13,
-                    fontFamily: 'ui-monospace, SFMono-Regular, "SF Mono", Consolas, monospace',
-                    resize: "vertical",
-                  }}
-                />
-              </div>
+              {/* Descripción (opcional) eliminada intencionalmente */}
 
               <div
                 style={{

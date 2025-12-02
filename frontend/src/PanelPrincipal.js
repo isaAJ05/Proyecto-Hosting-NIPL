@@ -347,7 +347,7 @@ function PanelPrincipal() {
               {isHistoryOpen ? "☰" : "☰"}
             </button>
             <img
-              src="/red_logo_OSWIDTH.png"
+              src="/hm_logoWIDTH.png"
               alt="Logo MicroServicios"
               style={{ height: 44, marginLeft: 10, marginRight: 14, borderRadius: 12 }}
             />

@@ -279,7 +279,7 @@ function EditarMicroservicio({ id, onBack, lightTheme = false }) {
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 10.5L12 3l9 7.5V21a1.5 1.5 0 01-1.5 1.5H4.5A1.5 1.5 0 013 21V10.5zM9 21V12h6v9" />
           </svg>
           <img
-            src="/red_logo_OSWIDTH.png"
+            src="/hm_logoWIDTH.png"
             alt="Logo MicroServicios"
             style={{ height: 44, marginLeft: 12, borderRadius: 12 }}
           />

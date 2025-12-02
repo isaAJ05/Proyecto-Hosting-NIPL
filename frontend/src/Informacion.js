@@ -84,7 +84,7 @@ function Informacion({ onBack, section, onSectionChange, isHistoryOpen, setIsHis
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 10.5L12 3l9 7.5V21a1.5 1.5 0 01-1.5 1.5H4.5A1.5 1.5 0 013 21V10.5zM9 21V12h6v9" />
           </svg>
-          <img src="/red_logo_OSWIDTH.png" alt="Logo MicroServicios" style={{ height: 44, borderRadius: 12 }} />
+          <img src="/hm_logoWIDTH.png" alt="Logo MicroServicios" style={{ height: 44, borderRadius: 12 }} />
         </button>
         <h1>Información</h1>
         <button
