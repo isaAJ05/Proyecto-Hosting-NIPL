@@ -45,12 +45,6 @@ docker compose up -d
 docker network connect traefik-net proyecto_traefik
 ```
 
-**🐳 Docker (Despliegue completo)** 
-```bash
-docker network create traefik-net
-docker compose up --build -d
-```
-
 ---
 ## 📘 Documento Técnico
 Este proyecto implementa una **plataforma de hosting dinámico basada en contenedores Docker**, donde los usuarios pueden:
@@ -182,6 +176,7 @@ La plataforma implementa múltiples estrategias para garantizar un uso eficiente
 - Priorización de contenedores activos.
   
  
+
 
 
 
