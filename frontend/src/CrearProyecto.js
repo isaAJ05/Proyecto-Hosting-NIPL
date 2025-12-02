@@ -517,6 +517,51 @@ CMD ["gunicorn", "--bind", "0.0.0.0:80", "app:app"]`,
           {/* Formulario */}
           <div style={{ flex: 1, overflow: "auto", padding: 6 }}>
             <form onSubmit={handleSubmit}>
+
+              {/* Template Base */}
+              <div style={{ marginBottom: 16 }}>
+                <label
+                  style={{
+                    display: "block",
+                    marginBottom: 6,
+                    fontWeight: 500,
+                    fontSize: 13,
+                    color: lightTheme ? "#656d76" : "#8b949e",
+                  }}
+                >
+                  Template Base *
+                </label>
+                <select
+                  value={project.template}
+                  onChange={(e) => setProject((prev) => ({ ...prev, template: e.target.value }))}
+
+                  style={{
+                    width: "100%",
+                    padding: "7px 10px",
+                    border: `1px solid ${lightTheme ? "#d1d9e0" : "#1c1c1c"}`,
+                    borderRadius: 4,
+                    background: lightTheme ? "#fff" : "#1c1c1c",
+                    color: lightTheme ? "#1f2328" : "#e6edf3",
+                    fontSize: 13,
+                  }}
+                  required
+                >
+                  <option value="">Seleccionar template</option>
+                  <option value="html-static">Sitio Estático (HTML/CSS/JS)</option>
+                  <option value="react">Aplicación React</option>
+                  <option value="nodejs">Flask con plantillas HTML</option>
+                </select>
+                <div
+                  style={{
+                    marginTop: 4,
+                    color: lightTheme ? "#656d76" : "#8b949e",
+                    fontSize: 11,
+                  }}
+                >
+                  Selecciona el tipo de template que clonaste y modificaste
+                </div>
+              </div>
+
               {/* Nombre del Proyecto */}
               <div style={{ marginBottom: 16 }}>
                 <label
@@ -602,49 +647,7 @@ CMD ["gunicorn", "--bind", "0.0.0.0:80", "app:app"]`,
                 </div>
               </div>
 
-              {/* Template Base */}
-              <div style={{ marginBottom: 16 }}>
-                <label
-                  style={{
-                    display: "block",
-                    marginBottom: 6,
-                    fontWeight: 500,
-                    fontSize: 13,
-                    color: lightTheme ? "#656d76" : "#8b949e",
-                  }}
-                >
-                  Template Base *
-                </label>
-                <select
-                  value={project.template}
-                  onChange={(e) => setProject((prev) => ({ ...prev, template: e.target.value }))}
 
-                  style={{
-                    width: "100%",
-                    padding: "7px 10px",
-                    border: `1px solid ${lightTheme ? "#d1d9e0" : "#1c1c1c"}`,
-                    borderRadius: 4,
-                    background: lightTheme ? "#fff" : "#1c1c1c",
-                    color: lightTheme ? "#1f2328" : "#e6edf3",
-                    fontSize: 13,
-                  }}
-                  required
-                >
-                  <option value="">Seleccionar template</option>
-                  <option value="html-static">Sitio Estático (HTML/CSS/JS)</option>
-                  <option value="react">Aplicación React</option>
-                  <option value="nodejs">Flask con plantillas HTML</option>
-                </select>
-                <div
-                  style={{
-                    marginTop: 4,
-                    color: lightTheme ? "#656d76" : "#8b949e",
-                    fontSize: 11,
-                  }}
-                >
-                  Selecciona el tipo de template que clonaste y modificaste
-                </div>
-              </div>
 
               {/* Descripción (opcional) eliminada intencionalmente */}
 
