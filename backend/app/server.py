@@ -17,7 +17,8 @@ app.register_blueprint(projects_bp, url_prefix='/projects')
 if __name__ == "__main__":
 	# Start background cleaner: stop projects idle > 30 minutes, check every 5 minutes
 	try:
-		start_cleanup_thread(idle_seconds=30 * 60, interval_seconds=5 * 60)
+		# Reduce interval to 60s so idle detection is more timely (was 5*60)
+		start_cleanup_thread(idle_seconds=30 * 60, interval_seconds=60)
 	except Exception as e:
 		print(f"Failed to start cleanup thread: {e}")
 	app.run(host="0.0.0.0", port=8000, debug=True)
