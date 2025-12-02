@@ -1,0 +1,53 @@
+version: '3.8'
+
+services:
+  backend:
+    image: python:3.11-slim
+    container_name: proyecto_backend
+    working_dir: /app
+    volumes:
+      - ./backend:/app:delegated
+    command: /bin/sh -c "pip install --no-cache-dir -r /app/requirements.txt && cd /app/app && python server.py"
+    ports:
+      - "8000:8000"
+    networks:
+      - traefik-net
+    restart: unless-stopped
+
+  frontend:
+    image: node:18
+    container_name: proyecto_frontend
+    working_dir: /app
+    volumes:
+      - ./frontend:/app:delegated
+      - /app/node_modules
+    command: /bin/sh -c "npm install --silent && npm run start"
+    ports:
+      - "3000:3000"
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+    restart: unless-stopped
+
+  traefik:
+    image: traefik:v2.10
+    container_name: proyecto_traefik
+    restart: unless-stopped
+    command:
+      - --providers.docker=true
+      - --providers.docker.exposedbydefault=false
+      - --entryPoints.web.address=:80
+      - --api.dashboard=true
+    ports:
+      - "80:80"
+      - "8080:8080"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ./proxy/traefik.yml:/etc/traefik/traefik.yml:ro
+      - ./proxy/traefik_dynamic.yml:/etc/traefik/dynamic/traefik_dynamic.yml:ro
+      - ./proxy/acme.json:/acme.json
+    networks:
+      - traefik-net
+
+networks:
+  traefik-net:
+    external: true

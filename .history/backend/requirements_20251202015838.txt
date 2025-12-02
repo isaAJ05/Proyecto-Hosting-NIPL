@@ -1,4 +1,8 @@
 docker
 flask
 flask-cors
+requests
+flask
+flask-cors
+docker
 python-dotenv

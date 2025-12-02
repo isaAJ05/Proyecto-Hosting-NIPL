@@ -4,8 +4,7 @@ import { useEffect, useState, useRef } from "react"
 import Informacion from "./Informacion"
 import "./App.css"
 import Login from "./Login"
-import AgregarMicroservicio from "./AgregarMicroservicio"
-import EditarMicroservicio from "./EditarMicroservicio"
+import CrearProyecto from "./CrearProyecto"
 
 function PanelPrincipal() {
   const [showInfoPage, setShowInfoPage] = useState(false)
@@ -63,48 +62,35 @@ function PanelPrincipal() {
         username = userObj.username || userObj.name || userObj.email || "Invitado"
       } catch { }
     }
-    fetch("http://127.0.0.1:5000/microservices", {
-      headers: {
-        "X-User": username,
-      },
-    })
+    // Fetch projects from backend projects API and filter by owner
+    const ownerEmail = (JSON.parse(savedUser || '{}') || {}).email || null
+    const tokenContract = sessionStorage.getItem('tokenContract') || null
+    const headers = {}
+    if (ownerEmail) headers['X-Owner-Email'] = ownerEmail
+    if (tokenContract) headers['X-Token-Contract'] = tokenContract
+    fetch("http://127.0.0.1:8000/projects/", { headers })
       .then((res) => res.json())
-      .then((data) => setMicroservices(data.microservices || data || []))
-      .catch((err) => console.error("Error fetching microservices:", err))
+      .then((data) => {
+        // backend returns either a map of projects or an object; normalize to array
+        if (Array.isArray(data)) {
+          setMicroservices(data)
+        } else if (data && typeof data === 'object') {
+          // if it's an object keyed by id -> values are project records
+          const arr = Object.values(data)
+          setMicroservices(arr)
+        } else {
+          setMicroservices([])
+        }
+      })
+      .catch((err) => console.error("Error fetching projects:", err))
   }, [])
 
   useEffect(() => {
     const savedUser = sessionStorage.getItem("user")
     if (savedUser) {
       setUser(JSON.parse(savedUser))
-      setIsLoggedIn(true);
+      setIsLoggedIn(true)
     }
-    verificarEstadoDocker(setDockerActive);
-  }, [])
-
-  // Función reutilizable para verificar el estado de Docker
-  const verificarEstadoDocker = (setDockerActive) => {
-    console.log("Consultando estado de Docker...");
-    fetch("http://127.0.0.1:8000/auth/loginis_docker_active")
-      .then((res) => res.json())
-      .then((data) => {
-        console.log("Respuesta Docker:", data);
-        setDockerActive(data.active);
-      })
-      .catch((err) => {
-        console.error("Error consultando Docker:", err);
-        setDockerActive(false);
-      });
-  };
-
-  // Consulta el estado de Docker al montar el componente
-  useEffect(() => {
-    const savedUser = sessionStorage.getItem("user");
-    if (savedUser) {
-      setUser(JSON.parse(savedUser));
-      setIsLoggedIn(true);
-    }
-    verificarEstadoDocker(setDockerActive);
   }, [])
 
   useEffect(() => {
@@ -117,7 +103,20 @@ function PanelPrincipal() {
     sessionStorage.setItem("lightTheme", lightTheme)
   }, [lightTheme])
 
-
+  // Consulta el estado de Docker al montar el componente
+  useEffect(() => {
+    console.log("Consultando estado de Docker...")
+    fetch("http://127.0.0.1:8000/containers/is_docker_active")
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("Respuesta Docker:", data)
+        setDockerActive(data.active)
+      })
+      .catch((err) => {
+        console.error("Error consultando Docker:", err)
+        setDockerActive(false)
+      })
+  }, [])
 
   //CLIC FUERA DE SIDEBAR
   useEffect(() => {
@@ -147,11 +146,17 @@ function PanelPrincipal() {
     }
   }, [showUserPanel])
 
-  // Función para manejar login (yo digo que crear un json para ese usuario)
+  // Función para manejar login 
   const handleLogin = (userData) => {
     setUser(userData)
     setIsLoggedIn(true)
     sessionStorage.setItem("user", JSON.stringify(userData))
+    // refrescar lista al iniciar sesión
+    try {
+      refreshMicroservices()
+    } catch (e) {
+      // refreshMicroservices estará definido después, el efecto también lo cubrirá
+    }
   }
 
   // CRUD: Crear microservicio
@@ -172,7 +177,7 @@ function PanelPrincipal() {
 
   // Función para refrescar la lista de microservicios
   const refreshMicroservices = () => {
-    // Obtener usuario actual (si no hay, usar 'Invitado')
+      // Obtener usuario actual (si no hay, usar 'Invitado')
     const savedUser = sessionStorage.getItem("user")
     let username = "Invitado"
     if (savedUser) {
@@ -181,35 +186,102 @@ function PanelPrincipal() {
         username = userObj.username || userObj.name || userObj.email || "Invitado"
       } catch { }
     }
-    // Guardar el username usado para filtrar en sessionStorage
-    sessionStorage.setItem("usernameFiltrado", username)
-    console.log("[refreshMicroservices] Usuario usado para filtrar:", username)
-    fetch("http://127.0.0.1:5000/microservices", {
-      headers: {
-        "X-User": username,
-      },
-    })
-      .then(async (res) => {
-        const data = await res.json()
-        console.log("[refreshMicroservices] Respuesta del backend:", data)
-        return data
-      })
-      .then((data) => setMicroservices(data.microservices || data || []))
-      .catch((err) => {
-        console.error("Error fetching microservices:", err)
-        alert("Error al obtener microservicios: " + err)
-      })
+      // Guardar el username usado para filtrar en sessionStorage
+      sessionStorage.setItem("usernameFiltrado", username)
+      console.log("[refreshMicroservices] Usuario usado para filtrar:", username)
+      // Fetch projects from projects API
+      const ownerEmail = (JSON.parse(savedUser || '{}') || {}).email || null
+      const tokenContract = sessionStorage.getItem('tokenContract') || null
+      const headers = {}
+      if (ownerEmail) headers['X-Owner-Email'] = ownerEmail
+    if (tokenContract) headers['X-Token-Contract'] = tokenContract
+    console.log("[refreshMicroservices] Headers usados:", headers)
+      fetch('http://127.0.0.1:8000/projects/', { headers })
+        .then(async (res) => {
+          if (!res.ok) throw new Error(`HTTP ${res.status}`)
+          const data = await res.json()
+          console.log('[refreshMicroservices] Respuesta del backend:', data)
+          return data
+        })
+        .then((data) => {
+          const arr = Array.isArray(data) ? data : Object.values(data || {})
+          // After getting the basic project list, fetch per-project status to read Docker-started info
+          Promise.all(
+            arr.map(async (proj) => {
+              try {
+                const res = await fetch(`http://127.0.0.1:8000/projects/${proj.id}/status`)
+                if (!res.ok) return proj
+                const status = await res.json()
+                // prefer docker_running_seconds if available, otherwise fall back to last_access
+                if (status.docker_running_seconds != null) {
+                  proj.docker_running_seconds = status.docker_running_seconds
+                  proj.docker_started_at = status.docker_started_at
+                }
+                return proj
+              } catch (e) {
+                return proj
+              }
+            })
+          ).then((updated) => setMicroservices(updated))
+        })
+        .catch((err) => {
+          console.error('Error fetching projects:', err)
+          alert('Error al obtener proyectos: ' + err.message)
+        })
   }
 
   // CRUD: Eliminar microservicio (ahora con modal personalizado)
   const handleDelete = async () => {
     if (!microserviceToDelete) return
-    await fetch(`http://127.0.0.1:5000/microservices/${microserviceToDelete}`, { method: "DELETE" })
-    setMicroservices(microservices.filter((m) => m.id !== microserviceToDelete))
-    setShowDeleteModal(false)
-    setMicroserviceToDelete(null)
-    setShowSuccessToast(true)
-    setTimeout(() => setShowSuccessToast(false), 2000)
+    try {
+      const savedUser = sessionStorage.getItem('user')
+      const ownerEmail = (savedUser && JSON.parse(savedUser).email) || null
+      const tokenContract = sessionStorage.getItem('tokenContract') || null
+      const headers = {}
+        // Si ya hay usuario en sesión (recarga), refrescar proyectos
+        try {
+          refreshMicroservices()
+        } catch (e) {
+          // refreshMicroservices se define más abajo; el mount-effect ya realiza fetch al inicio también
+        }
+      if (ownerEmail) headers['X-Owner-Email'] = ownerEmail
+      if (tokenContract) headers['X-Token-Contract'] = tokenContract
+
+      const res = await fetch(`http://127.0.0.1:8000/projects/${microserviceToDelete}`, { method: 'DELETE', headers })
+      if (!res.ok) {
+        let msg = `Error: HTTP ${res.status}`
+        try {
+          const body = await res.json()
+          msg = body.error || body.message || msg
+        } catch (e) { /* ignore json parse errors */ }
+        alert('No se pudo eliminar el proyecto: ' + msg)
+        return
+      }
+
+      // refrescar desde backend para mantener consistencia
+      await refreshMicroservices()
+      setShowDeleteModal(false)
+      setMicroserviceToDelete(null)
+      setShowSuccessToast(true)
+      setTimeout(() => setShowSuccessToast(false), 2000)
+    } catch (err) {
+      console.error('Error eliminando proyecto:', err)
+      alert('Error al eliminar el proyecto: ' + err.message)
+    }
+  }
+
+  // Helper: format duration in human friendly form
+  function formatDuration(ms) {
+    if (!ms || ms < 0) return '-'
+    const sec = Math.floor(ms / 1000)
+    const days = Math.floor(sec / 86400)
+    const hours = Math.floor((sec % 86400) / 3600)
+    const minutes = Math.floor((sec % 3600) / 60)
+    const seconds = sec % 60
+    if (days > 0) return `${days}d ${hours}h ${minutes}m`
+    if (hours > 0) return `${hours}h ${minutes}m ${seconds}s`
+    if (minutes > 0) return `${minutes}m ${seconds}s`
+    return `${seconds}s`
   }
 
   // Si estamos en la vista de información, mostrar la página interna
@@ -232,7 +304,7 @@ function PanelPrincipal() {
   }
   if (showAddMicroservice) {
     return (
-      <AgregarMicroservicio
+      <CrearProyecto
         onBack={() => {
           setShowAddMicroservice(false)
           refreshMicroservices() // Refrescar la lista cuando regresemos
@@ -268,16 +340,16 @@ function PanelPrincipal() {
         >
           <nav className="navbar">
             <button className="toggle-history-btn"
-              onClick={() => setIsHistoryOpen(!isHistoryOpen)}
-              title="Menú Info">
+            onClick={() => setIsHistoryOpen(!isHistoryOpen)}
+            title="Menú Info">
               {isHistoryOpen ? "☰" : "☰"}
             </button>
             <img
-              src="/red_logo_OSWIDTH.png"
+              src="/hm_logoWIDTH.png"
               alt="Logo MicroServicios"
               style={{ height: 44, marginLeft: 10, marginRight: 14, borderRadius: 12 }}
             />
-            <h1>Microservicios</h1>
+            <h1>Mis Proyectos</h1>
             <button
               style={{
                 marginLeft: "auto",
@@ -324,7 +396,7 @@ function PanelPrincipal() {
                   right: 0,
                   background: lightTheme ? "#fff" : "#131313",
                   color: lightTheme ? "#323232" : "#fff",
-                  border: `1.5px solid ${lightTheme ? "#9b0018" : "#fff"}`,
+                  border: `1.5px solid ${lightTheme ? "#5b009b" : "#fff"}`,
                   borderRadius: 8,
                   boxShadow: "0 4px 24px #000a",
                   minWidth: 180,
@@ -365,53 +437,10 @@ function PanelPrincipal() {
                 >
                   Project ID: {sessionStorage.getItem("tokenContract") || "N/A"}
                 </div>
+                {/* boton de renovar token removido */}
                 <button
                   style={{
-                    background: "#ff9696",
-                    color: "#131313",
-                    border: "none",
-                    borderRadius: 6,
-                    padding: "8px 0",
-                    fontWeight: 600,
-                    fontSize: 15,
-                    cursor: "pointer",
-                    transition: "background 0.2s",
-                    marginBottom: 8,
-                  }}
-                  onClick={async () => {
-                    try {
-                      const email = ((user && (user.username || user.name || user.email)) || "").trim().toLowerCase()
-                      const pass = sessionStorage.getItem("userPassword") || "" // Obtener la contraseña guardada
-                      const token = sessionStorage.getItem("tokenContract") || ""
-                      const res = await fetch("http://127.0.0.1:5000/login", {
-                        method: "POST",
-                        headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify({
-                          email,
-                          password: pass,
-                          token_contract: token,
-                        }),
-                      })
-                      const data = await res.json()
-                      if (res.ok && data.accessToken) {
-                        sessionStorage.setItem("accessToken", data.accessToken)
-                        setShowRenewTokenToast(true)
-                        setTimeout(() => setShowRenewTokenToast(false), 2000)
-                      } else {
-                        alert(data.error || "No se pudo renovar el token")
-                      }
-                    } catch (err) {
-                      alert("No se pudo conectar con el backend")
-                    }
-                  }}
-                  onMouseOver={(e) => (e.currentTarget.style.background = "#f77777")}
-                  onMouseOut={(e) => (e.currentTarget.style.background = "#ff9696")}
-                >
-                  Renovar token
-                </button>
-                <button
-                  style={{
-                    background: "#9b0018",
+                    background: "#5b009b",
                     color: "#fff",
                     border: "none",
                     borderRadius: 6,
@@ -431,15 +460,15 @@ function PanelPrincipal() {
                       sessionStorage.removeItem("user")
                     }, 350)
                   }}
-                  onMouseOver={(e) => (e.currentTarget.style.background = "#680010")}
-                  onMouseOut={(e) => (e.currentTarget.style.background = "#9b0018")}
+                  onMouseOver={(e) => (e.currentTarget.style.background = "#3d0068")}
+                  onMouseOut={(e) => (e.currentTarget.style.background = "#5b009b")}
                 >
                   Cerrar sesión
                 </button>
               </div>
             )}
           </nav>
-
+          
           <aside ref={sidebarRef} className={`side-menu${isHistoryOpen ? " open" : ""}`}>
             <div className="sidebar-controls">
               <button onClick={() => setIsHistoryOpen(!isHistoryOpen)} title={isHistoryOpen ? "Cerrar" : "Abrir"}>
@@ -447,7 +476,7 @@ function PanelPrincipal() {
               </button>
             </div>
             {isHistoryOpen && (
-
+              
               <ul className="sidebar-list">
                 {/* "Información" como texto normal */}
                 <div style={{
@@ -455,13 +484,16 @@ function PanelPrincipal() {
                   fontSize: 16,
                   marginBottom: 8,
                   color: "#ffffffff",
-                  cursor: "default"  // Evita que cambie el cursor
+                  cursor: "default" // Evita que cambie el cursor
+                  
                 }}>
                   Información
                 </div>
 
                 <li
-                  style={{ cursor: "pointer", paddingLeft: 16 }}
+                   style={{ cursor: "pointer", paddingLeft: 16 }}
+  onMouseEnter={e => e.currentTarget.style.backgroundColor = "#7d05d354"}
+  onMouseLeave={e => e.currentTarget.style.backgroundColor = "transparent"}
                   onClick={() => {
                     setInfoSection("descripcion")
                     setShowInfoPage(true)
@@ -583,7 +615,7 @@ function PanelPrincipal() {
           )}
           <div className="panel-content">
             <div className="panel-header-row" style={{ display: "flex", alignItems: "center" }}>
-              <h2 style={{ marginBottom: 0 }}>Lista de Microservicios</h2>
+              <h2 style={{ marginBottom: 0 }}>Lista de Proyectos</h2>
               <div style={{ marginLeft: "auto", display: "flex", gap: 10 }}>
                 <button
                   className="action-btn"
@@ -596,7 +628,7 @@ function PanelPrincipal() {
                 <button
                   className="action-btn"
                   style={{ fontWeight: 600 }}
-                  title="Agregar microservicio"
+                  title="Agregar Proyecto"
                   onClick={() => setShowAddMicroservice(true)}
                 >
                   &#x2b;
@@ -608,86 +640,214 @@ function PanelPrincipal() {
                 <thead>
                   <tr>
                     <th>Nombre</th>
-                    <th>Tipo de Procesamiento</th>
+                    <th>Subdominio</th>
                     <th>ID</th>
-                    <th>Puerto</th>
                     <th>Estado</th>
-                    <th>Endpoint</th>
+                    <th>Creado</th>
+                    <th>Tiempo corriendo</th>
                     <th>Acciones</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {microservices.map((microservice) => (
-                    <tr key={microservice.id}>
-                      <td>{microservice.name}</td>
-                      <td>{microservice.processing_type}</td>
-                      <td>{microservice.id}</td>
-                      <td>{microservice.port}</td>
-                      <td>
-                        <span
-                          className={`status-badge ${microservice.status === "created" ? "status-yellow" : "status-green"}`}
-                        >
-                          {microservice.status}
-                        </span>
-                      </td>
-                      <td>
-                        <button
+                  {microservices.length === 0 ? (
+                    <tr>
+                      <td colSpan={7} style={{ textAlign: 'center', padding: 36 }}>
+                        <div
                           style={{
-                            display: "inline-block",
-                            background: "#ff9696",
-                            color: "#000000ff",
-                            padding: "7px 16px",
-                            borderRadius: 6,
-                            fontWeight: 600,
-                            fontSize: 14,
-                            textDecoration: "none",
-                            boxShadow: "0 2px 8px #0002",
-                            transition: "background 0.2s",
-                            border: "none",
-                            cursor: "pointer",
+                            display: 'flex',
+                            flexDirection: 'column',
+                            alignItems: 'center',
+                            gap: 12,
+                            padding: 20,
+                            maxWidth: 760,
+                            margin: '8px auto',
                           }}
-                          onClick={async () => {
-                            const token = (sessionStorage.getItem("accessToken") || "").trim()
-                            const tokenContract = (sessionStorage.getItem("tokenContract") || "").trim()
-                            let url = `http://localhost:${microservice.port}/${microservice.endpoint}`
-                            if (microservice.processing_type === "Suma") {
-                              url += `?a=5&b=3`
-                            }
-                            if (microservice.processing_type === "Consulta Roble") {
-                              url += `?tableName=eventos_demo`
-                            }
-                            setEditEndpointUrlValue(url)
-                            setShowEditEndpointUrlModal(true)
-                          }}
-                          onMouseOver={(e) => (e.currentTarget.style.background = "#f77777")}
-                          onMouseOut={(e) => (e.currentTarget.style.background = "#ff9696")}
                         >
-                          Probar Endpoint
-                        </button>
+                          <img
+                            src="https://cdn-icons-png.flaticon.com/512/4076/4076500.png"
+                            alt="Sin proyectos"
+                            style={{ width: 72, opacity: 0.9 }}
+                          />
+                          <h3 style={{ margin: 0, fontSize: 18, fontWeight: 700 }}>No tienes proyectos aún</h3>
+                          <p style={{ maxWidth: 720, opacity: 0.85, margin: '6px 0 12px' }}>
+                            Crea tu primer proyecto: despliega un contenedor y obten un subdominio.
+                          </p>
+                          <button
+                            className="action-btn"
+                            onClick={() => setShowAddMicroservice(true)}
+                            style={{ minWidth: 160, padding: '10px 18px' }}
+                          >
+                            Nuevo proyecto
+                          </button>
+                        </div>
                       </td>
-                      <td style={{ display: "flex", gap: 6 }}>
+                    </tr>
+                  ) : (
+                    microservices.map((microservice) => (
+                      <tr key={microservice.id}>
+                        <td style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+                          <div>{microservice.name}</div>
+                          <div style={{ fontSize: 12, color: lightTheme ? '#444' : '#cfcfcf' }}>
+                            CPU: {microservice.cpu || '-'} • Mem: {microservice.memory || '-'} • Rate: {microservice.rate_limit_per_minute ?? microservice.rate_limit ?? '-'} /min
+                          </div>
+                        </td>
+                        <td>
+                          {microservice.subdomain ? (
+                            <a
+                              href={`http://${microservice.subdomain}`}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              style={{ color: lightTheme ? '#0b66ff' : '#7fb0ff', textDecoration: 'underline' }}
+                              title={`Abrir ${microservice.subdomain}`}
+                            >
+                              {microservice.subdomain}
+                            </a>
+                          ) : microservice.repo ? (
+                            <a
+                              href={microservice.repo}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              style={{ color: lightTheme ? '#0b66ff' : '#7fb0ff', textDecoration: 'underline' }}
+                              title={`Abrir repositorio`}
+                            >
+                              {microservice.repo}
+                            </a>
+                          ) : (
+                            '-'
+                          )}
+                        </td>
+                        <td>{microservice.id}</td>
+                        <td>
+                          <span
+                            className={`status-badge ${microservice.status === "created" ? "status-yellow" : (microservice.status === 'stopped' ? 'status-red' : 'status-green')}`}
+                          >
+                            {microservice.status}
+                          </span>
+                        </td>
+                        <td >{microservice.created_at ? new Date(microservice.created_at).toLocaleString() : '-'}</td>
+                        <td>
+                          {microservice.status === 'running' ? (
+                            microservice.docker_running_seconds != null ?
+                              formatDuration(microservice.docker_running_seconds * 1000) :
+                              (microservice.last_access ? formatDuration(Date.now() - Date.parse(microservice.last_access)) : '-')
+                          ) : '-'}
+                        </td>
+                        <td style={{ display: "flex", gap: 6, alignItems: 'center' }}>
                         <button
                           className="action-btn"
-                          title="Ver código"
-                          onClick={async () => {
-                            setCodeToShow("Cargando...")
-                            setShowCodeModal(true)
-                            try {
-                              const res = await fetch(`http://127.0.0.1:5000/microservices/${microservice.id}/mainpy`)
-                              if (!res.ok) throw new Error("No se pudo obtener el código")
-                              const data = await res.json()
-                              setCodeToShow(data.code || "Sin código disponible")
-                            } catch (err) {
-                              setCodeToShow("Error al obtener el código: " + err.message)
+                          title="Abrir Proyecto"
+                          onClick={() => {
+                            const tryOpen = (raw, preferHttp = true) => {
+                              if (!raw) return false
+                              const hasProtocol = raw.startsWith('http://') || raw.startsWith('https://')
+                              const url = hasProtocol ? raw : (preferHttp ? `http://${raw}` : `https://${raw}`)
+                              try {
+                                window.open(url, '_blank', 'noopener,noreferrer')
+                                return true
+                              } catch (e) { return false }
+                            }
+                            const opened = microservice.subdomain ? tryOpen(microservice.subdomain) : false
+                            if (!opened && microservice.repo) {
+                              // si subdominio no se abrió, intentar repo
+                              const repo = microservice.repo
+                              // si el repo está en formato SSH (git@...), intentar convertir a https
+                              const normalizedRepo = repo && repo.startsWith('git@') ? repo.replace(/^git@([^:]+):/, 'https://$1/').replace(/\.git$/, '') : repo
+                              const repoUrl = normalizedRepo && (normalizedRepo.startsWith('http') ? normalizedRepo : `https://${normalizedRepo}`)
+                              try {
+                                window.open(repoUrl, '_blank', 'noopener,noreferrer')
+                              } catch (e) {
+                                alert('No se pudo abrir el repositorio')
+                              }
+                            } else if (!opened) {
+                              alert('No hay subdominio ni repositorio disponible para abrir')
                             }
                           }}
                         >
-                          <span role="img" aria-label="Ver código">
-                            👁️
-                          </span>
+                          🔗
                         </button>
-                        <button className="action-btn" title="Editar" onClick={() => setEditId(microservice.id)}>
-                          ✏️
+                        {/* Botón explícito para abrir el repo origen */}
+                        <button
+                          className="action-btn"
+                          title="Ver repositorio origen"
+                          onClick={() => {
+                            const repo = microservice.repo
+                            if (!repo) {
+                              alert('No hay repositorio asociado a este proyecto')
+                              return
+                            }
+                            let normalized = repo
+                            if (normalized.startsWith('git@')) {
+                              // convertir git@github.com:owner/repo.git -> https://github.com/owner/repo
+                              normalized = normalized.replace(/^git@([^:]+):/, 'https://$1/')
+                              if (normalized.endsWith('.git')) normalized = normalized.slice(0, -4)
+                            }
+                            if (!normalized.startsWith('http://') && !normalized.startsWith('https://')) {
+                              normalized = 'https://' + normalized
+                            }
+                            try {
+                              window.open(normalized, '_blank', 'noopener,noreferrer')
+                            } catch (e) {
+                              alert('No se pudo abrir el repositorio')
+                            }
+                          }}
+                        >
+                          <img
+                            src={process.env.PUBLIC_URL + '/github-mark-white.svg'}
+                            alt="GitHub"
+                            aria-label="Abrir repositorio en GitHub"
+                            style={{ width: 18, height: 18, display: 'inline-block', verticalAlign: 'middle' }}
+                          />
+                        </button>
+                        <button
+                          className="action-btn"
+                          title="Start"
+                          onClick={async () => {
+                            const savedUser = sessionStorage.getItem('user')
+                            const ownerEmail = (savedUser && JSON.parse(savedUser).email) || null
+                            const tokenContract = sessionStorage.getItem('tokenContract') || null
+                            const headers = { 'Content-Type': 'application/json' }
+                            if (ownerEmail) headers['X-Owner-Email'] = ownerEmail
+                            if (tokenContract) headers['X-Token-Contract'] = tokenContract
+                            const res = await fetch(`http://127.0.0.1:8000/projects/${microservice.id}/start`, { method: 'POST', headers })
+                            if (res.ok) refreshMicroservices()
+                            else alert('Error arrancando proyecto')
+                          }}
+                        >
+                          ▶️
+                        </button>
+                        <button
+                          className="action-btn"
+                          title="Stop"
+                          onClick={async () => {
+                            const savedUser = sessionStorage.getItem('user')
+                            const ownerEmail = (savedUser && JSON.parse(savedUser).email) || null
+                            const tokenContract = sessionStorage.getItem('tokenContract') || null
+                            const headers = { 'Content-Type': 'application/json' }
+                            if (ownerEmail) headers['X-Owner-Email'] = ownerEmail
+                            if (tokenContract) headers['X-Token-Contract'] = tokenContract
+                            const res = await fetch(`http://127.0.0.1:8000/projects/${microservice.id}/stop`, { method: 'POST', headers })
+                            if (res.ok) refreshMicroservices()
+                            else alert('Error deteniendo proyecto')
+                          }}
+                        >
+                          ⏸️
+                        </button>
+                        <button
+                          className="action-btn"
+                          title="Touch"
+                          onClick={async () => {
+                            const headers = {}
+                            const savedUser = sessionStorage.getItem('user')
+                            const ownerEmail = (savedUser && JSON.parse(savedUser).email) || null
+                            const tokenContract = sessionStorage.getItem('tokenContract') || null
+                            if (ownerEmail) headers['X-Owner-Email'] = ownerEmail
+                            if (tokenContract) headers['X-Token-Contract'] = tokenContract
+                            const res = await fetch(`http://127.0.0.1:8000/projects/${microservice.id}/touch`, { method: 'POST', headers })
+                            if (res.ok) refreshMicroservices()
+                            else alert('Error tocando proyecto')
+                          }}
+                        >
+                          🔁
                         </button>
                         <button
                           className="action-btn"
@@ -732,13 +892,15 @@ function PanelPrincipal() {
                                 Confirmar Eliminación
                               </h3>
                               <div style={{ fontSize: 16, marginBottom: 22 }}>
-                                ¿Estás seguro de que deseas eliminar este microservicio?
+                                ¿Estás segur@ de que deseas eliminar este proyecto?
                               </div>
                               <div style={{ display: "flex", gap: 16, justifyContent: "center" }}>
                                 <button
                                   className="action-btn"
-                                  style={{ background: "#b91c1c", color: "#fff", fontWeight: 600, minWidth: 90 }}
+                                  style={{ background: "#5b009b", color: "#fff", fontWeight: 600, minWidth: 90 }}
                                   onClick={handleDelete}
+                                  onMouseOver={(e) => (e.currentTarget.style.background = "#3d0068")}
+                                  onMouseOut={(e) => (e.currentTarget.style.background = "#5b009b")}
                                 >
                                   Eliminar
                                 </button>
@@ -760,7 +922,7 @@ function PanelPrincipal() {
                         )}
                       </td>
                     </tr>
-                  ))}
+                  ))) }
                 </tbody>
               </table>
               {/* AVISO DOCKER AQUÍ */}
@@ -856,7 +1018,7 @@ function PanelPrincipal() {
                     overflowWrap: "anywhere",
                   }}
                 >
-                  <span style={{ color: lightTheme ? "#ff9696" : "#75baff", whiteSpace: "nowrap" }}>GET</span>
+                  <span style={{ color: lightTheme ? "#c196ff" : "#75baff", whiteSpace: "nowrap" }}>GET</span>
                   <span
                     style={{
                       color: lightTheme ? "#ffb300" : "#ffb300",
@@ -1089,7 +1251,7 @@ function PanelPrincipal() {
           {/* Footer */}
           <footer className="footer">
             <div>
-              Oak Services &copy; 2025 &nbsp;&nbsp; <span style={{ fontWeight: 600 }}></span>
+              Host Me &copy; 2025 &nbsp;&nbsp; <span style={{ fontWeight: 600 }}></span>
             </div>
             <div>
               <span>Contacto: oakservicesglobal@gmail.com</span>
