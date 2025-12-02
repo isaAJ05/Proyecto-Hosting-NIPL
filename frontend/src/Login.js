@@ -96,7 +96,7 @@ export default function Login({ isLoggedIn, setIsLoggedIn, handleLogin }) {
               }}
             />
           </div>
-             
+
           <div
             style={{
               flex: "1",
@@ -105,47 +105,58 @@ export default function Login({ isLoggedIn, setIsLoggedIn, handleLogin }) {
               display: "flex",
               flexDirection: "column",
               justifyContent: "center",
-                   backgroundImage: `
+              backgroundImage: `
        radial-gradient(circle at center, #c4b5fd, transparent)
      `,
             }}
           >
             <form
               onSubmit={async e => {
-              e.preventDefault();
-              const user = loginUser.trim().toLowerCase();
-              const pass = loginPass.trim();
-              const token = tokenContract.trim();
-              setLoginError("");
+                e.preventDefault();
+                const user = loginUser.trim().toLowerCase();
+                const pass = loginPass.trim();
+                const token = tokenContract.trim();
+                setLoginError("");
 
-              try {
-                const res = await fetch("http://127.0.0.1:8000/auth/login", {
-                  method: "POST",
-                  headers: { "Content-Type": "application/json" },
-                  body: JSON.stringify({
-                    email: user,
-                    password: pass,
-                    token_contract: token,
-                  }),
-                });
+                try {
+                  const res = await fetch("http://127.0.0.1:8000/auth/login", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                      email: user,
+                      password: pass,
+                      token_contract: token,
+                    }),
+                  });
 
-                const data = await res.json();
-                if (res.ok && data.accessToken) {
-                  sessionStorage.setItem("accessToken", data.accessToken);
-                  sessionStorage.setItem("tokenContract", token);
-                  sessionStorage.setItem("userPassword", pass); // Guardar contraseña
-                  handleLogin({ email: user });
-                  setIsLoggedIn(true);
-                  setLoginFade(false);
-                } else {
-                  setLoginError(
-                    data.error || "Usuario o contraseña incorrectos"
-                  );
+                  const data = await res.json();
+                  if (res.ok && data.accessToken) {
+                    sessionStorage.setItem("accessToken", data.accessToken);
+                    sessionStorage.setItem("tokenContract", token);
+                    sessionStorage.setItem("userPassword", pass); // Guardar contraseña
+                    handleLogin({ email: user });
+                    setIsLoggedIn(true);
+                    setLoginFade(false);
+                    console.log("Consultando estado de Docker...");
+                    fetch("http://127.0.0.1:8000/auth/loginis_docker_active")
+                      .then((res) => res.json())
+                      .then((data) => {
+                        console.log("Respuesta Docker:", data);
+                        setDockerActive(data.active);
+                      })
+                      .catch((err) => {
+                        console.error("Error consultando Docker:", err);
+                        setDockerActive(false);
+                      });
+                  } else {
+                    setLoginError(
+                      data.error || "Usuario o contraseña incorrectos"
+                    );
+                  }
+                } catch (err) {
+                  setLoginError("No se pudo conectar con el backend");
                 }
-              } catch (err) {
-                setLoginError("No se pudo conectar con el backend");
-              }
-            }}
+              }}
               style={{
                 display: showRegister ? "none" : "flex",
                 flexDirection: "column",
@@ -293,7 +304,7 @@ export default function Login({ isLoggedIn, setIsLoggedIn, handleLogin }) {
                       <circle cx="12" cy="12" r="3" />
                     </svg>
                   )}
-                </button>                
+                </button>
               </div>
 
               <div style={{ position: "relative", marginBottom: 4 }}>
@@ -481,7 +492,7 @@ export default function Login({ isLoggedIn, setIsLoggedIn, handleLogin }) {
             </form>
 
             {/* Formulario de registro (signup) */}
-              <form
+            <form
               onSubmit={async e => {
                 e.preventDefault();
                 setRegisterError("");
@@ -707,7 +718,7 @@ export default function Login({ isLoggedIn, setIsLoggedIn, handleLogin }) {
               {registerError && (
                 Array.isArray(registerError) ? (
                   <div style={{ color: "#dc2626", background: "#fee2e2", borderRadius: 8, padding: "8px 12px", marginBottom: 4, textAlign: "left", fontSize: 12, border: "1px solid #fca5a5" }}>
-                    <strong style={{display:'block', marginBottom:6}}>La contraseña debe contener:</strong>
+                    <strong style={{ display: 'block', marginBottom: 6 }}>La contraseña debe contener:</strong>
                     <ul style={{ margin: 0, paddingLeft: 18 }}>
                       {registerError.map((it, i) => (
                         <li key={i}>{it}</li>
