@@ -43,6 +43,13 @@ def _sanitize(s: str) -> str:
     s = s.strip('-')
     return s or 'x'
 
+def _email_localpart(e):
+    if not e:
+        return None
+    try:
+        return e.split('@', 1)[0].strip().lower()
+    except Exception:
+        return e.strip().lower()
 
 def create_project_from_repo(repo_url, name, user='anon', subdomain=None, cpu=None, memory=None, owner_email=None, owner_token_contract=None):
     if not name or not repo_url:
