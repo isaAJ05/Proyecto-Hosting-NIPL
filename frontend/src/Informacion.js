@@ -279,7 +279,7 @@ function Informacion({ onBack, section, onSectionChange, isHistoryOpen, setIsHis
               }}
               onMouseEnter={(e) => {
                 if (section !== "descripcion") {
-                  e.target.style.background = "rgba(155,0,24,0.2)";
+                  e.target.style.background = "#7d05d354";
                   e.target.style.borderLeft = "3px solid #5b009b";
                 }
               }}
@@ -309,7 +309,7 @@ function Informacion({ onBack, section, onSectionChange, isHistoryOpen, setIsHis
               }}
               onMouseEnter={(e) => {
                 if (section !== "instrucciones") {
-                  e.target.style.background = "rgba(155,0,24,0.2)";
+                  e.target.style.background = "#7d05d354";
                   e.target.style.borderLeft = "3px solid #5b009b";
                 }
               }}
@@ -338,7 +338,7 @@ function Informacion({ onBack, section, onSectionChange, isHistoryOpen, setIsHis
               }}
               onMouseEnter={(e) => {
                 if (section !== "roble") {
-                  e.target.style.background = "rgba(155,0,24,0.2)";
+                  e.target.style.background = "#7d05d354";
                   e.target.style.borderLeft = "3px solid #5b009b";
                 }
               }}
@@ -367,7 +367,7 @@ function Informacion({ onBack, section, onSectionChange, isHistoryOpen, setIsHis
               }}
               onMouseEnter={(e) => {
                 if (section !== "ejemplos") {
-                  e.target.style.background = "rgba(155,0,24,0.2)";
+                  e.target.style.background = "#7d05d354";
                   e.target.style.borderLeft = "3px solid #5b009b";
                 }
               }}
@@ -396,7 +396,7 @@ function Informacion({ onBack, section, onSectionChange, isHistoryOpen, setIsHis
               }}
               onMouseEnter={(e) => {
                 if (section !== "equipo") {
-                  e.target.style.background = "rgba(155,0,24,0.2)";
+                  e.target.style.background = "#7d05d354";
                   e.target.style.borderLeft = "3px solid #5b009b";
                 }
               }}
