@@ -319,7 +319,7 @@ CMD ["gunicorn", "--bind", "0.0.0.0:80", "app:app"]`,
               right: 0,
               background: lightTheme ? "#fff" : "#131313",
               color: lightTheme ? "#323232" : "#fff",
-              border: `1.5px solid ${lightTheme ? "#9b0018" : "#fff"}`,
+              border: `1.5px solid ${lightTheme ? "#5b009b" : "#fff"}`,
               borderRadius: 8,
               boxShadow: "0 4px 24px #000a",
               minWidth: 180,
@@ -360,7 +360,7 @@ CMD ["gunicorn", "--bind", "0.0.0.0:80", "app:app"]`,
             </div>
             <button
               style={{
-                background: "#ff9696",
+                background: "#c196ff",
                 color: "#131313",
                 border: "none",
                 borderRadius: 6,
@@ -397,14 +397,14 @@ CMD ["gunicorn", "--bind", "0.0.0.0:80", "app:app"]`,
                   alert("No se pudo conectar con el backend")
                 }
               }}
-              onMouseOver={(e) => (e.currentTarget.style.background = "#f77777")}
-              onMouseOut={(e) => (e.currentTarget.style.background = "#ff9696")}
+              onMouseOver={(e) => (e.currentTarget.style.background = "#b377f7")}
+              onMouseOut={(e) => (e.currentTarget.style.background = "#c196ff")}
             >
               Renovar token
             </button>
             <button
               style={{
-                background: "#9b0018",
+                background: "#5b009b",
                 color: "#fff",
                 border: "none",
                 borderRadius: 6,
@@ -423,8 +423,8 @@ CMD ["gunicorn", "--bind", "0.0.0.0:80", "app:app"]`,
                   sessionStorage.removeItem("user")
                 }, 350)
               }}
-              onMouseOver={(e) => (e.currentTarget.style.background = "#680010")}
-              onMouseOut={(e) => (e.currentTarget.style.background = "#9b0018")}
+              onMouseOver={(e) => (e.currentTarget.style.background = "#3d0068")}
+              onMouseOut={(e) => (e.currentTarget.style.background = "#5b009b")}
             >
               Cerrar sesión
             </button>
@@ -469,7 +469,7 @@ CMD ["gunicorn", "--bind", "0.0.0.0:80", "app:app"]`,
                 width: 28,
                 height: 28,
                 borderRadius: "50%",
-                background: "#ff9696",
+                background: "#c196ff",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
@@ -879,7 +879,7 @@ CMD ["gunicorn", "--bind", "0.0.0.0:80", "app:app"]`,
                   width: 28,
                   height: 28,
                   borderRadius: "50%",
-                  background: "#ff9696",
+                  background: "#c196ff",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
@@ -989,7 +989,7 @@ CMD ["gunicorn", "--bind", "0.0.0.0:80", "app:app"]`,
                       background: lightTheme ? "#f6f8fa" : "#0d1117",
                       border: `1px solid ${lightTheme ? "#d1d9e0" : "#1c1c1c"}`,
                       borderRadius: 4,
-                      color: "#ff9696",
+                      color: "#c196ff",
                       fontSize: 12,
                       fontWeight: 500,
                       textDecoration: "none",
@@ -1186,7 +1186,7 @@ CMD ["gunicorn", "--bind", "0.0.0.0:80", "app:app"]`,
                 onClick={handleSubmit}
                 disabled={isLoading}
                 style={{
-                  background: isLoading ? "#6c757d" : "#ff9696",
+                  background: isLoading ? "#6c757d" : "#c196ff",
                   color: "#131313",
                   border: "none",
                   borderRadius: 4,
@@ -1198,8 +1198,8 @@ CMD ["gunicorn", "--bind", "0.0.0.0:80", "app:app"]`,
                   alignItems: "center",
                   gap: 6,
                 }}
-                onMouseOver={(e) => !isLoading && (e.currentTarget.style.background = "#f77777")}
-                onMouseOut={(e) => !isLoading && (e.currentTarget.style.background = "#ff9696")}
+                onMouseOver={(e) => !isLoading && (e.currentTarget.style.background = "#b377f7")}
+                onMouseOut={(e) => !isLoading && (e.currentTarget.style.background = "#c196ff")}
               >
                 {isLoading ? (
                   <>
@@ -1227,7 +1227,7 @@ CMD ["gunicorn", "--bind", "0.0.0.0:80", "app:app"]`,
       {/* Footer */}
       <footer className="footer" style={{ margin: 0 }}>
         <div>
-          Oak Services &copy; 2025 &nbsp;&nbsp; <span style={{ fontWeight: 600 }}></span>
+          Host Me &copy; 2025 &nbsp;&nbsp; <span style={{ fontWeight: 600 }}></span>
         </div>
         <div>
           <span>Contacto: oakservicesglobal@gmail.com</span>

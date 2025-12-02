@@ -36,7 +36,7 @@ export default function TooltipPortal({ visible, x, y, children }) {
         pointerEvents: "none",
         background: "#131313",
         color: "#fff",
-        border: "1.5px solid #9b0018",
+        border: "1.5px solid #5b009b",
         borderRadius: 7,
         fontSize: "0.93em",
         padding: "7px 13px 7px 13px",

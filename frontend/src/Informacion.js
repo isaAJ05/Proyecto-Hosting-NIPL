@@ -8,12 +8,12 @@ function Informacion({ onBack, section, onSectionChange, isHistoryOpen, setIsHis
 
   const codeStyle = {
     background: "#1c1c1c",
-    color: "#e6ccccff",
+    color: "#cabbd8ff",
     padding: 16,
     borderRadius: 8,
     fontSize: 14,
     overflowX: "auto",
-    border: "3px solid #9b0018",
+    border: "3px solid #5b009b",
   }
   const [lightTheme, setLightTheme] = useState(() => {
     const saved = sessionStorage.getItem("lightTheme")
@@ -133,7 +133,7 @@ function Informacion({ onBack, section, onSectionChange, isHistoryOpen, setIsHis
               right: 0,
               background: lightTheme ? "#fff" : "#131313",
               color: lightTheme ? "#323232" : "#fff",
-              border: `1.5px solid ${lightTheme ? "#9b0018" : "#fff"}`,
+              border: `1.5px solid ${lightTheme ? "#5b009b" : "#fff"}`,
               borderRadius: 8,
               boxShadow: "0 4px 24px #000a",
               minWidth: 180,
@@ -176,7 +176,7 @@ function Informacion({ onBack, section, onSectionChange, isHistoryOpen, setIsHis
             </div>
             <button
               style={{
-                background: "#ff9696",
+                background: "#c196ff",
                 color: "#131313",
                 border: "none",
                 borderRadius: 6,
@@ -213,14 +213,14 @@ function Informacion({ onBack, section, onSectionChange, isHistoryOpen, setIsHis
                   alert("No se pudo conectar con el backend")
                 }
               }}
-              onMouseOver={(e) => (e.currentTarget.style.background = "#f77777")}
-              onMouseOut={(e) => (e.currentTarget.style.background = "#ff9696")}
+              onMouseOver={(e) => (e.currentTarget.style.background = "#b377f7")}
+              onMouseOut={(e) => (e.currentTarget.style.background = "#c196ff")}
             >
               Renovar token
             </button>
             <button
               style={{
-                background: "#9b0018",
+                background: "#5b009b",
                 color: "#fff",
                 border: "none",
                 borderRadius: 6,
@@ -240,8 +240,8 @@ function Informacion({ onBack, section, onSectionChange, isHistoryOpen, setIsHis
                   sessionStorage.removeItem("user")
                 }, 350)
               }}
-              onMouseOver={(e) => (e.currentTarget.style.background = "#680010")}
-              onMouseOut={(e) => (e.currentTarget.style.background = "#9b0018")}
+              onMouseOver={(e) => (e.currentTarget.style.background = "#3d0068")}
+              onMouseOut={(e) => (e.currentTarget.style.background = "#5b009b")}
             >
               Cerrar sesión
             </button>
@@ -272,7 +272,7 @@ function Informacion({ onBack, section, onSectionChange, isHistoryOpen, setIsHis
               style={{
                 cursor: "pointer",
                 paddingLeft: 16,
-                background: section === "descripcion" ? "#9b0018" : "transparent",
+                background: section === "descripcion" ? "#5b009b" : "transparent",
                 color: "white",
                 fontWeight: section === "descripcion" ? "bold" : "normal",
                 borderLeft: "3px solid #1c1c1c",
@@ -280,7 +280,7 @@ function Informacion({ onBack, section, onSectionChange, isHistoryOpen, setIsHis
               onMouseEnter={(e) => {
                 if (section !== "descripcion") {
                   e.target.style.background = "rgba(155,0,24,0.2)";
-                  e.target.style.borderLeft = "3px solid #9b0018";
+                  e.target.style.borderLeft = "3px solid #5b009b";
                 }
               }}
               onMouseLeave={(e) => {
@@ -302,7 +302,7 @@ function Informacion({ onBack, section, onSectionChange, isHistoryOpen, setIsHis
               style={{
                 cursor: "pointer",
                 paddingLeft: 16,
-                background: section === "instrucciones" ? "#9b0018" : "transparent",
+                background: section === "instrucciones" ? "#5b009b" : "transparent",
                 color: "white",
                 fontWeight: section === "instrucciones" ? "bold" : "normal",
                 borderLeft: "3px solid #1c1c1c",
@@ -310,7 +310,7 @@ function Informacion({ onBack, section, onSectionChange, isHistoryOpen, setIsHis
               onMouseEnter={(e) => {
                 if (section !== "instrucciones") {
                   e.target.style.background = "rgba(155,0,24,0.2)";
-                  e.target.style.borderLeft = "3px solid #9b0018";
+                  e.target.style.borderLeft = "3px solid #5b009b";
                 }
               }}
               onMouseLeave={(e) => {
@@ -331,7 +331,7 @@ function Informacion({ onBack, section, onSectionChange, isHistoryOpen, setIsHis
               style={{
                 cursor: "pointer",
                 paddingLeft: 16,
-                background: section === "roble" ? "#9b0018" : "transparent",
+                background: section === "roble" ? "#5b009b" : "transparent",
                 color: "white",
                 fontWeight: section === "roble" ? "bold" : "normal",
                 borderLeft: "3px solid #1c1c1c",
@@ -339,7 +339,7 @@ function Informacion({ onBack, section, onSectionChange, isHistoryOpen, setIsHis
               onMouseEnter={(e) => {
                 if (section !== "roble") {
                   e.target.style.background = "rgba(155,0,24,0.2)";
-                  e.target.style.borderLeft = "3px solid #9b0018";
+                  e.target.style.borderLeft = "3px solid #5b009b";
                 }
               }}
               onMouseLeave={(e) => {
@@ -360,7 +360,7 @@ function Informacion({ onBack, section, onSectionChange, isHistoryOpen, setIsHis
               style={{
                 cursor: "pointer",
                 paddingLeft: 16,
-                background: section === "ejemplos" ? "#9b0018" : "transparent",
+                background: section === "ejemplos" ? "#5b009b" : "transparent",
                 color: "white",
                 fontWeight: section === "ejemplos" ? "bold" : "normal",
                 borderLeft: "3px solid #1c1c1c",
@@ -368,7 +368,7 @@ function Informacion({ onBack, section, onSectionChange, isHistoryOpen, setIsHis
               onMouseEnter={(e) => {
                 if (section !== "ejemplos") {
                   e.target.style.background = "rgba(155,0,24,0.2)";
-                  e.target.style.borderLeft = "3px solid #9b0018";
+                  e.target.style.borderLeft = "3px solid #5b009b";
                 }
               }}
               onMouseLeave={(e) => {
@@ -389,7 +389,7 @@ function Informacion({ onBack, section, onSectionChange, isHistoryOpen, setIsHis
               style={{
                 cursor: "pointer",
                 paddingLeft: 16,
-                background: section === "equipo" ? "#9b0018" : "transparent",
+                background: section === "equipo" ? "#5b009b" : "transparent",
                 color: "white",
                 fontWeight: section === "equipo" ? "bold" : "normal",
                 borderLeft: "3px solid #1c1c1c",
@@ -397,7 +397,7 @@ function Informacion({ onBack, section, onSectionChange, isHistoryOpen, setIsHis
               onMouseEnter={(e) => {
                 if (section !== "equipo") {
                   e.target.style.background = "rgba(155,0,24,0.2)";
-                  e.target.style.borderLeft = "3px solid #9b0018";
+                  e.target.style.borderLeft = "3px solid #5b009b";
                 }
               }}
               onMouseLeave={(e) => {
@@ -426,7 +426,7 @@ function Informacion({ onBack, section, onSectionChange, isHistoryOpen, setIsHis
           {/* DESCRIPCIÓN SECTION */}
           {section === "descripcion" && (
             <>
-              <h1 style={{ marginBottom: 10, color: "#ffffffff" }}>🍁 Oak Services</h1>
+              <h1 style={{ marginBottom: 10, color: "#ffffffff" }}>🍁 Host Me</h1>
               <div style={{ display: "flex", gap: 8, flexWrap: "wrap", marginBottom: 18 }}>
                 <img
                   src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white"
@@ -449,10 +449,10 @@ function Informacion({ onBack, section, onSectionChange, isHistoryOpen, setIsHis
                   alt="Roble"
                 />
               </div>
-              <hr style={{ borderColor: "#9b0018", opacity: 3 }} />
+              <hr style={{ borderColor: "#5b009b", opacity: 3 }} />
               <h2 style={{ color: "#ffffffff" }}>🪵 Descripción general</h2>
               <p>
-                <b>Oak Services</b> es una plataforma web que permite a los usuarios{" "}
+                <b>Host Me</b> es una plataforma web que permite a los usuarios{" "}
                 <b>crear, editar, eliminar y listar microservicios</b> de manera segura y aislada, con{" "}
                 <b>autenticación Roble</b>, gestión de usuarios y <b>despliegue automático en contenedores Docker</b>.
               </p>
@@ -472,19 +472,19 @@ function Informacion({ onBack, section, onSectionChange, isHistoryOpen, setIsHis
                 contenedores Docker independientes y validados automáticamente con Roble.
               </p>
               <>
-                <hr style={{ borderColor: "#9b0018", opacity: 3, marginTop: 24 }} />
+                <hr style={{ borderColor: "#5b009b", opacity: 3, marginTop: 24 }} />
                 <h2 style={{ color: "#ffffffff", marginTop: 24 }}>🏗️ Diagrama de Arquitectura</h2>
                
                   <div style={{ textAlign: "left", marginBottom: 12 }}>
                     <p style={{ color: "#ffffffff", fontSize: 17, marginBottom: 24 }}>
-                      Diagrama de arquitectura de Oak Services realizado en Enterprise Architect,
+                      Diagrama de arquitectura de Host Me realizado en Enterprise Architect,
                       mostrando la interacción entre el frontend, backend, Docker y Roble.
                     </p>
 
                     <img
                       src="/Diagrama_Arquitectura.png"
                       alt="Diagrama de Arquitectura"
-                      style={{ maxWidth: "100%", height: "auto", borderRadius: 8, border: "2px solid #9b0018" }}
+                      style={{ maxWidth: "100%", height: "auto", borderRadius: 8, border: "2px solid #5b009b" }}
                     />
                   </div>
 
@@ -497,7 +497,7 @@ function Informacion({ onBack, section, onSectionChange, isHistoryOpen, setIsHis
           {section === "instrucciones" && (
             <>
               <h1 style={{ color: "#ffffffff" }}>⚙️ Instrucciones de uso</h1>
-              <hr style={{ borderColor: "#9b0018", opacity: 3 }} />
+              <hr style={{ borderColor: "#5b009b", opacity: 3 }} />
               <h3 style={{ color: "#ffffffff" }}>🧱 Requisitos previos</h3>
               <ul>
                 <li>
@@ -529,7 +529,7 @@ docker compose up --build`}
                     href="http://localhost:3000"
                     target="_blank"
                     rel="noopener noreferrer"
-                    style={{ color: "#ff9696" }}
+                    style={{ color: "#c196ff" }}
                   >
                     http://localhost:3000
                   </a>
@@ -540,13 +540,13 @@ docker compose up --build`}
                     href="http://localhost:5000"
                     target="_blank"
                     rel="noopener noreferrer"
-                    style={{ color: "#ff9696" }}
+                    style={{ color: "#c196ff" }}
                   >
                     http://localhost:5000
                   </a>
                 </li>
               </ul>
-              <hr style={{ borderColor: "#9b0018", opacity: 3 }} />
+              <hr style={{ borderColor: "#5b009b", opacity: 3 }} />
               <h3 style={{ color: "#ffffffff" }}>🌐 Uso general de la plataforma</h3>
               <ol>
                 <li>
@@ -558,42 +558,42 @@ docker compose up --build`}
                 <li>Visualiza la tabla de microservicios con sus campos:</li>
               </ol>
               <table
-                style={{ borderCollapse: "collapse", width: "100%", marginBottom: 18, border: "2px solid #9b0018" }}
+                style={{ borderCollapse: "collapse", width: "100%", marginBottom: 18, border: "2px solid #5b009b" }}
               >
                 <thead>
                   <tr style={{ background: "#1c1c1c" }}>
-                    <th style={{ border: "2px solid #9b0018", padding: 8, color: "#ffffffff" }}>Campo</th>
-                    <th style={{ border: "2px solid #9b0018", padding: 8, color: "#ffffffff" }}>Descripción</th>
+                    <th style={{ border: "2px solid #5b009b", padding: 8, color: "#ffffffff" }}>Campo</th>
+                    <th style={{ border: "2px solid #5b009b", padding: 8, color: "#ffffffff" }}>Descripción</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td style={{ border: "2px solid #9b0018", padding: 8 }}>🧩 Nombre</td>
-                    <td style={{ border: "2px solid #9b0018", padding: 8 }}>Identificador del microservicio</td>
+                    <td style={{ border: "2px solid #5b009b", padding: 8 }}>🧩 Nombre</td>
+                    <td style={{ border: "2px solid #5b009b", padding: 8 }}>Identificador del microservicio</td>
                   </tr>
                   <tr>
-                    <td style={{ border: "2px solid #9b0018", padding: 8 }}>⚙️ Tipo de procesamiento</td>
-                    <td style={{ border: "2px solid #9b0018", padding: 8 }}>Hola Mundo/ Suma/ Consulta Roble</td>
+                    <td style={{ border: "2px solid #5b009b", padding: 8 }}>⚙️ Tipo de procesamiento</td>
+                    <td style={{ border: "2px solid #5b009b", padding: 8 }}>Hola Mundo/ Suma/ Consulta Roble</td>
                   </tr>
                   <tr>
-                    <td style={{ border: "2px solid #9b0018", padding: 8 }}>🆔 ID</td>
-                    <td style={{ border: "2px solid #9b0018", padding: 8 }}>Identificador único</td>
+                    <td style={{ border: "2px solid #5b009b", padding: 8 }}>🆔 ID</td>
+                    <td style={{ border: "2px solid #5b009b", padding: 8 }}>Identificador único</td>
                   </tr>
                   <tr>
-                    <td style={{ border: "2px solid #9b0018", padding: 8 }}>🔌 Puerto</td>
-                    <td style={{ border: "2px solid #9b0018", padding: 8 }}>Puerto Docker asignado</td>
+                    <td style={{ border: "2px solid #5b009b", padding: 8 }}>🔌 Puerto</td>
+                    <td style={{ border: "2px solid #5b009b", padding: 8 }}>Puerto Docker asignado</td>
                   </tr>
                   <tr>
-                    <td style={{ border: "2px solid #9b0018", padding: 8 }}>📶 Estado</td>
-                    <td style={{ border: "2px solid #9b0018", padding: 8 }}>Activo / Inactivo</td>
+                    <td style={{ border: "2px solid #5b009b", padding: 8 }}>📶 Estado</td>
+                    <td style={{ border: "2px solid #5b009b", padding: 8 }}>Activo / Inactivo</td>
                   </tr>
                   <tr>
-                    <td style={{ border: "2px solid #9b0018", padding: 8 }}>🌎 Endpoint</td>
-                    <td style={{ border: "2px solid #9b0018", padding: 8 }}>URL local o remota</td>
+                    <td style={{ border: "2px solid #5b009b", padding: 8 }}>🌎 Endpoint</td>
+                    <td style={{ border: "2px solid #5b009b", padding: 8 }}>URL local o remota</td>
                   </tr>
                   <tr>
-                    <td style={{ border: "2px solid #9b0018", padding: 8 }}>🧭 Acciones</td>
-                    <td style={{ border: "2px solid #9b0018", padding: 8 }}>Ver, Editar, Eliminar</td>
+                    <td style={{ border: "2px solid #5b009b", padding: 8 }}>🧭 Acciones</td>
+                    <td style={{ border: "2px solid #5b009b", padding: 8 }}>Ver, Editar, Eliminar</td>
                   </tr>
                 </tbody>
               </table>
@@ -610,12 +610,12 @@ docker compose up --build`}
               <div
                 style={{
                   fontSize: 15,
-                  color: "#ff9696",
+                  color: "#c196ff",
                   marginTop: 10,
                   padding: 12,
                   background: "#323232",
                   borderRadius: 8,
-                  border: "2px solid #9b0018",
+                  border: "2px solid #5b009b",
                 }}
               >
                 <b>⚠️ Nota importante:</b> Para probar un <b>endpoint</b>, el <b>token Roble</b> debe estar{" "}
@@ -623,7 +623,7 @@ docker compose up --build`}
                 Si el token ha expirado, utiliza la opción <b>Renovar Token</b> para obtener uno nuevo antes de
                 continuar.
               </div>
-              <hr style={{ borderColor: "#9b0018", opacity: 3, marginTop: 24 }} />
+              <hr style={{ borderColor: "#5b009b", opacity: 3, marginTop: 24 }} />
               <h3 style={{ color: "#ffffffff" }}>🧩 Crear o editar un microservicio</h3>
               <ol>
                 <li>
@@ -649,7 +649,7 @@ docker compose up --build`}
           {section === "roble" && (
             <>
               <h1 style={{ color: "#ffffffff" }}>🔐 Validación automática con Roble</h1>
-              <hr style={{ borderColor: "#9b0018", opacity: 3 }} />
+              <hr style={{ borderColor: "#5b009b", opacity: 3 }} />
               <h3 style={{ color: "#ffffffff" }}>¿Qué es Roble?</h3>
               <p>
                 <b>Roble</b> es una plataforma tecnológica creada por <b>OPENLAB – Universidad del Norte</b>, que
@@ -661,7 +661,7 @@ docker compose up --build`}
                 las aplicaciones validen usuarios sin necesidad de manejar credenciales directamente.
               </p>
               <p>
-                Cada microservicio creado en <b>Oak Services</b> se genera con código Flask que incluye esta{" "}
+                Cada microservicio creado en <b>Host Me</b> se genera con código Flask que incluye esta{" "}
                 <b>validación automática de Roble</b>, asegurando que solo usuarios autenticados puedan ejecutar sus
                 servicios.
               </p>
@@ -724,7 +724,7 @@ if __name__ == "__main__":
                   padding: 12,
                   background: "#323232",
                   borderRadius: 8,
-                  border: "3px solid #9b0018",
+                  border: "3px solid #5b009b",
                 }}
               >
                 ✅ Así, cada microservicio desplegado valida el token Roble antes de ejecutar cualquier operación.
@@ -736,7 +736,7 @@ if __name__ == "__main__":
           {section === "ejemplos" && (
             <>
               <h1 style={{ color: "#ffffffff" }}>🧪 Ejemplos de solicitudes</h1>
-              <hr style={{ borderColor: "#9b0018", opacity: 3 }} />
+              <hr style={{ borderColor: "#5b009b", opacity: 3 }} />
 
               <h3 style={{ color: "#ffffffff" }}>1️⃣ Hola Mundo</h3>
               <h4 style={{ color: "#ffffffff" }}>Código:</h4>
@@ -760,7 +760,7 @@ if __name__ == "__main__":
 }`}
               </pre>
 
-              <hr style={{ borderColor: "#9b0018", opacity: 3, margin: "32px 0" }} />
+              <hr style={{ borderColor: "#5b009b", opacity: 3, margin: "32px 0" }} />
 
               <h3 style={{ color: "#ffffffff" }}>2️⃣ Suma de dos números</h3>
               <h4 style={{ color: "#ffffffff" }}>Código:</h4>
@@ -801,7 +801,7 @@ def main(data=None):
 }`}
               </pre>
 
-              <hr style={{ borderColor: "#9b0018", opacity: 3, margin: "32px 0" }} />
+              <hr style={{ borderColor: "#5b009b", opacity: 3, margin: "32px 0" }} />
 
               <h3 style={{ color: "#ffffffff" }}>3️⃣ Consultar tabla en Roble</h3>
               <h4 style={{ color: "#ffffffff" }}>Código:</h4>
@@ -863,7 +863,7 @@ def main(data=None):
           {section === "equipo" && (
             <>
               <h1 style={{ color: "#ffffffff" }}>👥 Equipo de Desarrollo</h1>
-              <hr style={{ borderColor: "#9b0018", opacity: 3 }} />
+              <hr style={{ borderColor: "#5b009b", opacity: 3 }} />
               <h3 style={{ color: "#ffffffff" }}>🤝 Créditos</h3>
               <p>Este proyecto fue desarrollado por:</p>
               <ul style={{ fontSize: 18, lineHeight: 2 }}>
@@ -884,12 +884,12 @@ def main(data=None):
                 Proyecto desarrollado para la clase de <b>Estructura del Computador II</b> en la{" "}
                 <b>Universidad del Norte</b>.
               </p>
-              <hr style={{ borderColor: "#9b0018", opacity: 3, marginTop: 32 }} />
+              <hr style={{ borderColor: "#5b009b", opacity: 3, marginTop: 32 }} />
               <h3 style={{ color: "#ffffffff" }}>📧 Contacto</h3>
               <p>
                 Para más información o soporte, contáctanos en:{" "}
 
-                <a href=" mailto:oakservicesglobal@gmail.com" style={{ color: "#ff9696", fontWeight: 600 }}>
+                <a href=" mailto:oakservicesglobal@gmail.com" style={{ color: "#c196ff", fontWeight: 600 }}>
                   oakservicesglobal@gmail.com
                 </a>
               </p>
@@ -899,13 +899,13 @@ def main(data=None):
                   padding: 20,
                   background: "#1c1c1c",
                   borderRadius: 8,
-                  border: "2px solid #9b0018",
+                  border: "2px solid #5b009b",
                   textAlign: "center",
                 }}
               >
-                <p style={{ fontSize: 18, margin: 0 }}>Oak Services &copy; 2025</p>
-                <p style={{ fontSize: 14, color: "#ff9696", marginTop: 8 }}>
-                  Desarrollado con ♥️ por el equipo de Oak Services
+                <p style={{ fontSize: 18, margin: 0 }}>Host Me &copy; 2025</p>
+                <p style={{ fontSize: 14, color: "#c196ff", marginTop: 8 }}>
+                  Desarrollado con ♥️ por el equipo de Host Me
                 </p>
               </div>
             </>

@@ -69,7 +69,7 @@ export default function Login({ isLoggedIn, setIsLoggedIn, handleLogin }) {
             flexDirection: "row",
             background: "transparent",
             borderRadius: 16,
-            boxShadow: "0 0 25px 4px #9b0018, 0 8px 32px rgba(0, 0, 0, 0.3)",
+            boxShadow: "0 0 25px 4px #5b009b, 0 8px 32px rgba(0, 0, 0, 0.3)",
             overflow: "hidden",
             minHeight: 420,
           }}
@@ -86,7 +86,7 @@ export default function Login({ isLoggedIn, setIsLoggedIn, handleLogin }) {
           >
             <img
               src="/hm_logoXMAS.png"
-              alt="OAK Services Logo"
+              alt="Host Me Logo"
               style={{
                 maxWidth: "100%",
                 width: "400px",
@@ -352,7 +352,7 @@ export default function Login({ isLoggedIn, setIsLoggedIn, handleLogin }) {
                   type="submit"
                   style={{
                     flex: 1,
-                    background: "#9b0018",
+                    background: "#5b009b",
                     color: "#fff",
                     border: "none",
                     borderRadius: 8,
@@ -363,10 +363,10 @@ export default function Login({ isLoggedIn, setIsLoggedIn, handleLogin }) {
                     transition: "background 0.2s, transform 0.1s",
                   }}
                   onMouseEnter={(e) => {
-                    e.currentTarget.style.background = "#680010"
+                    e.currentTarget.style.background = "#3d0068"
                   }}
                   onMouseLeave={(e) => {
-                    e.currentTarget.style.background = "#9b0018"
+                    e.currentTarget.style.background = "#5b009b"
                   }}
                 >
                   Entrar
@@ -435,7 +435,7 @@ export default function Login({ isLoggedIn, setIsLoggedIn, handleLogin }) {
                   style={{
                     marginLeft: 8,
                     background: "none",
-                    color: "#9b0018",
+                    color: "#5b009b",
                     border: "none",
                     cursor: "pointer",
                     textDecoration: "underline",
@@ -724,7 +724,7 @@ export default function Login({ isLoggedIn, setIsLoggedIn, handleLogin }) {
               )}
 
               <div style={{ display: "flex", gap: 10, marginTop: 6 }}>
-                <button type="submit" style={{ flex: 1, background: "#9b0018", color: "#fff", border: "none", borderRadius: 8, height: 38, fontSize: 14, fontWeight: 600, cursor: "pointer" }}>
+                <button type="submit" style={{ flex: 1, background: "#5b009b", color: "#fff", border: "none", borderRadius: 8, height: 38, fontSize: 14, fontWeight: 600, cursor: "pointer" }}>
                   Crear cuenta
                 </button>
 

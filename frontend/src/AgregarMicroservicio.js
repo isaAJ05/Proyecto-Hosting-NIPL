@@ -459,7 +459,7 @@ def main(data=None):
               right: 0,
               background: lightTheme ? "#fff" : "#131313",
               color: lightTheme ? "#323232" : "#fff",
-              border: `1.5px solid ${lightTheme ? "#9b0018" : "#fff"}`,
+              border: `1.5px solid ${lightTheme ? "#5b009b" : "#fff"}`,
               borderRadius: 8,
               boxShadow: "0 4px 24px #000a",
               minWidth: 180,
@@ -502,7 +502,7 @@ def main(data=None):
             </div>
             <button
               style={{
-                background: "#ff9696",
+                background: "#c196ff",
                 color: "#131313",
                 border: "none",
                 borderRadius: 6,
@@ -539,14 +539,14 @@ def main(data=None):
                   alert("No se pudo conectar con el backend")
                 }
               }}
-              onMouseOver={(e) => (e.currentTarget.style.background = "#f77777")}
-              onMouseOut={(e) => (e.currentTarget.style.background = "#ff9696")}
+              onMouseOver={(e) => (e.currentTarget.style.background = "#b377f7")}
+              onMouseOut={(e) => (e.currentTarget.style.background = "#c196ff")}
             >
               Renovar token
             </button>
             <button
               style={{
-                background: "#9b0018",
+                background: "#5b009b",
                 color: "#fff",
                 border: "none",
                 borderRadius: 6,
@@ -566,8 +566,8 @@ def main(data=None):
                   sessionStorage.removeItem("user")
                 }, 350)
               }}
-              onMouseOver={(e) => (e.currentTarget.style.background = "#680010")}
-              onMouseOut={(e) => (e.currentTarget.style.background = "#9b0018")}
+              onMouseOver={(e) => (e.currentTarget.style.background = "#3d0068")}
+              onMouseOut={(e) => (e.currentTarget.style.background = "#5b009b")}
             >
               Cerrar sesión
             </button>
@@ -606,7 +606,7 @@ def main(data=None):
               width: 28, // Reducido
               height: 28, // Reducido
               borderRadius: '50%',
-              background: '#ff9696',
+              background: '#c196ff',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
@@ -825,7 +825,7 @@ def main(data=None):
                 width: 28, // Reducido
                 height: 28, // Reducido
                 borderRadius: '50%',
-                background: '#ff9696',
+                background: '#c196ff',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
@@ -892,7 +892,7 @@ def main(data=None):
                 onClick={handleSubmit}
                 disabled={isLoading}
                 style={{
-                  background: isLoading ? '#6c757d' : '#ff9696',
+                  background: isLoading ? '#6c757d' : '#c196ff',
                   color: '#131313',
                   border: 'none',
                   borderRadius: 4,
@@ -904,8 +904,8 @@ def main(data=None):
                   alignItems: 'center',
                   gap: 6
                 }}
-                onMouseOver={e => (e.currentTarget.style.background = '#f77777')}
-                onMouseOut={e => (e.currentTarget.style.background = '#ff9696')}
+                onMouseOver={e => (e.currentTarget.style.background = '#b377f7')}
+                onMouseOut={e => (e.currentTarget.style.background = '#c196ff')}
               >
                 {isLoading ? (
                   <>
@@ -931,7 +931,7 @@ def main(data=None):
       {/* Footer - sin margenes adicionales */}
       <footer className="footer" style={{ margin: 0 }}>
         <div>
-          Oak Services &copy; 2025 &nbsp;&nbsp; <span style={{ fontWeight: 600 }}></span>
+          Host Me &copy; 2025 &nbsp;&nbsp; <span style={{ fontWeight: 600 }}></span>
         </div>
         <div>
           <span>Contacto: oakservicesglobal@gmail.com</span>

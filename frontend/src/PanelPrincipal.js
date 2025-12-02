@@ -398,7 +398,7 @@ function PanelPrincipal() {
                   right: 0,
                   background: lightTheme ? "#fff" : "#131313",
                   color: lightTheme ? "#323232" : "#fff",
-                  border: `1.5px solid ${lightTheme ? "#9b0018" : "#fff"}`,
+                  border: `1.5px solid ${lightTheme ? "#5b009b" : "#fff"}`,
                   borderRadius: 8,
                   boxShadow: "0 4px 24px #000a",
                   minWidth: 180,
@@ -441,7 +441,7 @@ function PanelPrincipal() {
                 </div>
                 <button
                   style={{
-                    background: "#ff9696",
+                    background: "#c196ff",
                     color: "#131313",
                     border: "none",
                     borderRadius: 6,
@@ -478,14 +478,14 @@ function PanelPrincipal() {
                       alert("No se pudo conectar con el backend")
                     }
                   }}
-                  onMouseOver={(e) => (e.currentTarget.style.background = "#f77777")}
-                  onMouseOut={(e) => (e.currentTarget.style.background = "#ff9696")}
+                  onMouseOver={(e) => (e.currentTarget.style.background = "#b377f7")}
+                  onMouseOut={(e) => (e.currentTarget.style.background = "#c196ff")}
                 >
                   Renovar token
                 </button>
                 <button
                   style={{
-                    background: "#9b0018",
+                    background: "#5b009b",
                     color: "#fff",
                     border: "none",
                     borderRadius: 6,
@@ -505,8 +505,8 @@ function PanelPrincipal() {
                       sessionStorage.removeItem("user")
                     }, 350)
                   }}
-                  onMouseOver={(e) => (e.currentTarget.style.background = "#680010")}
-                  onMouseOut={(e) => (e.currentTarget.style.background = "#9b0018")}
+                  onMouseOver={(e) => (e.currentTarget.style.background = "#3d0068")}
+                  onMouseOut={(e) => (e.currentTarget.style.background = "#5b009b")}
                 >
                   Cerrar sesión
                 </button>
@@ -1053,7 +1053,7 @@ function PanelPrincipal() {
                     overflowWrap: "anywhere",
                   }}
                 >
-                  <span style={{ color: lightTheme ? "#ff9696" : "#75baff", whiteSpace: "nowrap" }}>GET</span>
+                  <span style={{ color: lightTheme ? "#c196ff" : "#75baff", whiteSpace: "nowrap" }}>GET</span>
                   <span
                     style={{
                       color: lightTheme ? "#ffb300" : "#ffb300",
@@ -1286,7 +1286,7 @@ function PanelPrincipal() {
           {/* Footer */}
           <footer className="footer">
             <div>
-              Oak Services &copy; 2025 &nbsp;&nbsp; <span style={{ fontWeight: 600 }}></span>
+              Host Me &copy; 2025 &nbsp;&nbsp; <span style={{ fontWeight: 600 }}></span>
             </div>
             <div>
               <span>Contacto: oakservicesglobal@gmail.com</span>

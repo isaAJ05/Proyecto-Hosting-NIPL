@@ -50,7 +50,7 @@
 
 .action-btn {
   padding: 7px 16px;
-  background-color: #9b0018;
+  background-color: #5b009b;
   color: white;
   border: none;
   border-radius: 6px;
@@ -60,7 +60,7 @@
   transition: background 0.3s;
 }
 .action-btn:hover {
-  background-color: #680010;
+  background-color: #3d0068;
 }
 
 /* Status badges for projects */
@@ -105,11 +105,11 @@
 }
 
 .light-theme .action-btn {
-  background-color: #9b0018 !important;
+  background-color: #5b009b !important;
   color: #fff !important;
 }
 .light-theme .action-btn:hover {
-  background-color: #680010 !important;
+  background-color: #3d0068 !important;
   color: #fff !important;
 }
 
@@ -139,7 +139,7 @@
   align-items: center;
   padding: 1px 20px;
   border-bottom: 0px solid #333;
-  background: radial-gradient(circle, #9b0018 40%, #680010 100%);
+  background: radial-gradient(circle, #5b009b 40%, #3d0068 100%);
   color: #fff;
 }
 
@@ -210,7 +210,7 @@
   width: 100%;
   margin: 5px 0;
   padding: 8px;
-  background-color: #9b0018;
+  background-color: #5b009b;
   border: none;
   color: #fff;
   text-align: left;
@@ -221,7 +221,7 @@
   font-size: 14px;
 }
 .history-btn:hover {
-  background-color: #680010;
+  background-color: #3d0068;
 }
 
 /* Main layout split */
@@ -288,7 +288,7 @@
   color: #ffffff;
   font-family: "Segoe UI", sans-serif;
   font-size: 17px;
-  border: 1px solid #9b0018;
+  border: 1px solid #5b009b;
 
   border-radius: 8px;
   padding: 10px;
@@ -352,7 +352,7 @@
 .query-input button,
 .upload-btn {
   padding: 10px 20px;
-  background-color: #9b0018;
+  background-color: #5b009b;
   color: white;
   border: none;
   border-radius: 6px;
@@ -363,7 +363,7 @@
 }
 .query-input button:hover,
 .upload-btn:hover {
-  background-color: #680010;
+  background-color: #3d0068;
 }
 
 /* Ocultar input file */
@@ -388,7 +388,7 @@
   overflow-x: auto;
   overflow-y: auto;
   background-color: #1c1c1c;
-  border: 1px solid #9b0018;
+  border: 1px solid #5b009b;
   border-radius: 8px;
   margin: 10px 10px 0 10px;
   box-shadow: 0 0 8px rgba(60, 165, 108, 0.2);
@@ -424,7 +424,7 @@
   box-sizing: border-box;
   overflow-y: auto;
   background-color: #1c1c1c;
-  border: 1px solid #9b0018;
+  border: 1px solid #5b009b;
   border-radius: 8px;
   margin: 10px;
   margin-bottom: 58px;
@@ -506,13 +506,13 @@
 }
 
 .results-panel::-webkit-scrollbar-thumb {
-  background-color: #9b0018;
+  background-color: #5b009b;
   border-radius: 8px;
   border: 3px solid #1e1e2e;
 }
 
 .results-panel::-webkit-scrollbar-thumb:hover {
-  background-color: #680010;
+  background-color: #3d0068;
 }
 
 /* Modal de subir CSV */
@@ -536,7 +536,7 @@
   padding: 32px 28px 24px 28px;
   min-width: 340px;
   max-width: 95vw;
-  border: 2px solid #9b0018;
+  border: 2px solid #5b009b;
   display: flex;
   flex-direction: column;
   gap: 18px;
@@ -579,7 +579,7 @@
 }
 
 .modal input[type="file"]::file-selector-button {
-  background: #9b0018;
+  background: #5b009b;
   color: #fff;
   border: none;
   border-radius: 5px;
@@ -591,7 +591,7 @@
 }
 
 .modal input[type="file"]::file-selector-button:hover {
-  background: #680010;
+  background: #3d0068;
 }
 
 .modal textarea {
@@ -615,7 +615,7 @@
   opacity: 1;
 }
 .modal button {
-  background: #9b0018;
+  background: #5b009b;
   color: #fff;
   border: none;
   border-radius: 6px;
@@ -627,7 +627,7 @@
   transition: background 0.2s;
 }
 .modal button:hover {
-  background: #680010;
+  background: #3d0068;
 }
 
 /* Inputs destacados en el modal de subida de CSV */
@@ -642,7 +642,7 @@
   font-size: 1em;
   background: #323232;
   color: #fff;
-  border: 1.5px solid #9b0018;
+  border: 1.5px solid #5b009b;
   border-radius: 5px;
   margin-bottom: 10px;
   font-family: "Segoe UI", sans-serif;
@@ -654,7 +654,7 @@
 .modal select:focus {
   outline: none;
   border: 2px solid #ff1744;
-  box-shadow: 0 0 0 2px #9b001855;
+  box-shadow: 0 0 0 2px #5b009b55;
 }
 
 /* Animación de desvanecimiento y desenfoque para el login exitoso */
@@ -968,11 +968,11 @@ body.light-theme,
 }
 
 .light-theme .history-btn {
-  background-color: #9b0018 !important;
+  background-color: #5b009b !important;
   color: #fff;
 }
 .light-theme .history-btn:hover {
-  background-color: #680010 !important;
+  background-color: #3d0068 !important;
   color: #fff;
 }
 .light-theme .history-btn.active,
@@ -1013,7 +1013,7 @@ body.light-theme,
   font-size: 0.97em;
   font-weight: 600;
   color: #fff;
-  background: #9b0018;
+  background: #5b009b;
 }
 .status-yellow {
   background: #ffb300;
@@ -1050,7 +1050,7 @@ body.light-theme,
 
 .login-form {
   background: #131313;
-  border: 2px solid #9b0018;
+  border: 2px solid #5b009b;
   border-radius: 10px;
   box-shadow: 0 0 24px #000a;
   padding: 36px;
@@ -1068,7 +1068,7 @@ body.light-theme,
 
 .register-form {
   background: #131313;
-  border: 2px solid #9b0018;
+  border: 2px solid #5b009b;
   border-radius: 10px;
   box-shadow: 0 0 24px #000;
   padding: 36px;
@@ -1097,7 +1097,7 @@ body.light-theme,
 /* Estilos para el editor de Python */
 .python-editor-container {
   min-height: 400px;
-  border: 2px solid #9b0018;
+  border: 2px solid #5b009b;
   border-radius: 8px;
   background: #131313;
 }
@@ -1160,7 +1160,7 @@ body.light-theme,
   color: white;
   padding: 14px;
   transition: left 0.3s ease, width 0.3s ease;
-  border-right: 2px solid #9b0018;
+  border-right: 2px solid #5b009b;
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -1190,7 +1190,7 @@ body.light-theme,
 }
 
 .sidebar-controls button:hover {
-  background: #9b0018;
+  background: #5b009b;
 }
 
 .sidebar-list {
@@ -1207,5 +1207,5 @@ body.light-theme,
 }
 
 .sidebar-list li:hover {
-  background: #9b0018;
+  background: #5b009b;
 }
