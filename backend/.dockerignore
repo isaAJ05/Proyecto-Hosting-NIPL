@@ -1,0 +1,17 @@
+# Python virtualenvs and caches
+venv
+.venv
+env/
+__pycache__
+*.py[cod]
+
+# Local data
+.env
+*.sqlite3
+
+# Editor
+.vscode
+.idea
+
+# Git
+.git

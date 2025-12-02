@@ -3,8 +3,6 @@ import Informacion from "./Informacion"
 import "./App.css"
 import Login from "./Login"
 import CrearProyecto from "./CrearProyecto"
-import AgregarMicroservicio from "./AgregarMicroservicio"
-import EditarMicroservicio from "./EditarMicroservicio"
 
 function PanelPrincipal() {
   const [showInfoPage, setShowInfoPage] = useState(false)
