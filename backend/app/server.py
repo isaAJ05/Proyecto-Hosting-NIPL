@@ -1,3 +1,4 @@
+
 from flask import Flask
 from auth.auth_routes import auth_bp
 from containers.containers_routes import containers_bp
@@ -6,7 +7,17 @@ from cleanup import start_cleanup_thread
 from flask_cors import CORS
 
 app = Flask(__name__)
-CORS(app, origins=["http://localhost:3000", "http://frontend:3000"])
+# Permitir CORS para entornos de desarrollo: incluir localhost (puerto 80/3000), 127.0.0.1
+# y el nombre del servicio frontend dentro del compose. En producción restringir según convenga.
+CORS(app, resources={r"/*": {"origins": [
+	"http://localhost:3000",
+	"http://127.0.0.1:3000",
+	"http://localhost",
+	"http://127.0.0.1",
+	"http://frontend",
+	"http://frontend:3000",
+	"http://frontend:80"
+]}})
 
 
 # Registrar los Blueprints

@@ -104,7 +104,12 @@ function PanelPrincipal() {
 
   // Consulta el estado de Docker al montar el componente y cada vez que cambia isLoggedIn
   useEffect(() => {
-    verificarEstadoDocker()
+    console.log("Verificando estado de Docker...");
+    verificarEstadoDocker().then((result) => {
+      console.log("Resultado de verificación de Docker:", result);
+    }).catch((error) => {
+      console.error("Error al verificar Docker:", error);
+    });
   }, [isLoggedIn])
 
   //CLIC FUERA DE SIDEBAR
