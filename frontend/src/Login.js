@@ -1,7 +1,10 @@
 import React, { useState } from "react";
+import { useDocker } from "./DockerContext"; // Importar el contexto
 
 
 export default function Login({ isLoggedIn, setIsLoggedIn, handleLogin }) {
+  const { setDockerActive } = useDocker();
+
   const [loginUser, setLoginUser] = useState("");
   const [loginPass, setLoginPass] = useState("");
   const [loginError, setLoginError] = useState("");

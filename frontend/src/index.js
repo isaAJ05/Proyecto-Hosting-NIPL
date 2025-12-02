@@ -3,11 +3,14 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './PanelPrincipal';
 import reportWebVitals from './reportWebVitals';
+import { DockerProvider } from "./DockerContext"; // Importar el proveedor del contexto
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <DockerProvider>
+      <App />
+    </DockerProvider>
   </React.StrictMode>
 );
 
