@@ -34,7 +34,7 @@ services:
       - "80:80"
       - "8080:8080"
     volumes:
-      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /var/run/docker.sock:/var/run/docker.sock
       - ./proxy/traefik.yml:/etc/traefik/traefik.yml:ro
       - ./proxy/traefik_dynamic.yml:/etc/traefik/dynamic/traefik_dynamic.yml:ro
       - ./proxy/acme.json:/acme.json
