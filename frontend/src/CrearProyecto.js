@@ -79,7 +79,6 @@ CMD ["nginx", "-g", "daemon off;"]`,
         "📁 src/ - Código fuente React",
         "📁 public/ - Recursos públicos",
         "📁 package.json - Dependencias",
-        "📁 vite.config.js - Configuración Vite",
       ],
       dockerfile: `FROM node:18-slim AS build
 WORKDIR /app
@@ -112,12 +111,11 @@ CMD ["serve", "-s", "build", "-l", "80"]`,
     nodejs: {
       name: "Flask con plantillas HTML",
       description:
-        "Template para aplicaciones con Flask que sirven páginas con plantillas Jinja2 y recursos estáticos. Ideal para sitios y microservicios ligeros.",
+        "Template para aplicaciones con Flask que sirven páginas con plantillas html y recursos estáticos. Ideal para sitios y microservicios ligeros.",
       repository: "https://github.com/isaAJ05/flask.git",
       structure: [
         "📁 app.py - Punto de entrada de Flask (app)",
-        "📁 templates/ - Plantillas Jinja2 (HTML)",
-        "📁 static/ - Archivos estáticos (css, js, imágenes)",
+        "📁 templates/ - Plantillas HTML",
         "📁 requirements.txt - Dependencias Python",
       ],
       dockerfile: `FROM python:3.11-slim
