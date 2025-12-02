@@ -939,10 +939,8 @@ function PanelPrincipal() {
                               <div style={{ display: "flex", gap: 16, justifyContent: "center" }}>
                                 <button
                                   className="action-btn"
-                                  style={{ background: "#5b009b", color: "#fff", fontWeight: 600, minWidth: 90 }}
+                                  style={{ background: "#b91c1c", color: "#fff", fontWeight: 600, minWidth: 90 }}
                                   onClick={handleDelete}
-                                  onMouseOver={(e) => (e.currentTarget.style.background = "#3d0068")}
-                                  onMouseOut={(e) => (e.currentTarget.style.background = "#5b009b")}
                                 >
                                   Eliminar
                                 </button>

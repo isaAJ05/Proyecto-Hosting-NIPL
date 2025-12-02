@@ -1,0 +1,20 @@
+{
+  "96146007": {
+    "id": "96146007",
+    "name": "estatico",
+    "repo": "https://github.com/RogerMarenco/snake-main.git",
+    "owner_email": "Invitado",
+    "owner_token_contract": "oak_demo_9a01cfb26f",
+    "dir": "C:\\Users\\USUARIO\\Downloads\\Proyecto-Hosting-NIPL\\backend\\app\\..\\deployed_projects\\96146007",
+    "image": "project_96146007:latest",
+    "container_id": "f49ceac4a5820d9d48fad18cc9f2356512fb238c0b732de8c5ffa5fe5b047eda",
+    "subdomain": "estatico.Invitado.localhost",
+    "cpu": 1,
+    "memory": "512m",
+    "rate_limit_per_minute": 60,
+    "status": "running",
+    "created_at": "2025-12-02T04:59:20.324700+00:00",
+    "last_access": "2025-12-02T05:01:02.661032+00:00",
+    "last_started": "2025-12-02T04:59:20.324700+00:00"
+  }
+}Q
