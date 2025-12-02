@@ -163,8 +163,13 @@ CMD ["gunicorn", "--bind", "0.0.0.0:80", "app:app"]`,
       return
     }
 
-    if (!project.rate_limit || Number.parseInt(project.rate_limit) <= 0) {
-      setError("El rate limit debe ser mayor a 0 peticiones por minuto")
+    const rl = Number.parseInt(project.rate_limit)
+    if (!project.rate_limit || isNaN(rl)) {
+      setError("El rate limit debe ser un número válido")
+      return
+    }
+    if (rl < 10 || rl > 1000) {
+      setError("El rate limit debe estar entre 10 y 1000 peticiones por minuto")
       return
     }
 

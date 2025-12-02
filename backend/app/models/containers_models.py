@@ -22,17 +22,24 @@ def build_and_run(project_id, project_dir, image_tag, subdomain, cpu=None, memor
         # Rate limiting via Traefik middleware (if provided)
         if rate_limit_per_minute:
             try:
+                import math
                 avg_per_sec = float(rate_limit_per_minute) / 60.0
-                # Traefik expects average as a number. Avoid passing "1.0" which
-                # some Traefik label parsers try to parse as int and fail.
-                if float(avg_per_sec).is_integer():
-                    avg_val = str(int(avg_per_sec))
+                # Traefik's docker provider expects integer values for some fields
+                # (parsing decimals like "0.1666" causes strconv.ParseInt errors).
+                # To avoid parse errors we always send an integer string for average.
+                # Strategy:
+                #  - if avg_per_sec < 1 -> set average=1 and use burst=rate_limit_per_minute
+                #    so low-per-minute limits are enforced via burst (best-effort).
+                #  - otherwise set average to ceil(avg_per_sec) (integer >=1) and
+                #    set burst to ~10% of per-minute as before.
+                if avg_per_sec < 1.0:
+                    avg_val = '1'
+                    burst = max(1, int(float(rate_limit_per_minute)))
                 else:
-                    # keep a compact representation (no trailing zeros)
-                    avg_val = repr(avg_per_sec).rstrip('0').rstrip('.')
+                    avg_val = str(int(math.ceil(avg_per_sec)))
+                    burst = max(1, int(int(rate_limit_per_minute) // 10))
+
                 labels[f'traefik.http.middlewares.{router_name}-ratelimit.rateLimit.average'] = avg_val
-                # burst: allow some extra; use 10% of per-minute as burst or at least 1
-                burst = max(1, int(int(rate_limit_per_minute) // 10))
                 labels[f'traefik.http.middlewares.{router_name}-ratelimit.rateLimit.burst'] = str(burst)
                 # attach middleware to router (forwardauth will be added too)
                 labels[f'traefik.http.routers.{router_name}.middlewares'] = f'{router_name}-ratelimit@docker'
