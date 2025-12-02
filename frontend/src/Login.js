@@ -393,7 +393,7 @@ export default function Login({ isLoggedIn, setIsLoggedIn, handleLogin }) {
                   onClick={async () => {
                     setLoginError("");
                     try {
-                      const token = "oak_demo_9a01cfb26f"; // Token por defecto para invitado
+                      const token = "host_me_demo_655181d699"; // Token por defecto para invitado
                       const res = await fetch("http://127.0.0.1:8000/auth/login", {
                         method: "POST",
                         headers: { "Content-Type": "application/json" },

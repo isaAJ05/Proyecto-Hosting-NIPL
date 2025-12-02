@@ -439,50 +439,6 @@ function PanelPrincipal() {
                 </div>
                 <button
                   style={{
-                    background: "#c196ff",
-                    color: "#131313",
-                    border: "none",
-                    borderRadius: 6,
-                    padding: "8px 0",
-                    fontWeight: 600,
-                    fontSize: 15,
-                    cursor: "pointer",
-                    transition: "background 0.2s",
-                    marginBottom: 8,
-                  }}
-                  onClick={async () => {
-                    try {
-                      const email = ((user && (user.username || user.name || user.email)) || "").trim().toLowerCase()
-                      const pass = sessionStorage.getItem("userPassword") || "" // Obtener la contraseña guardada
-                      const token = sessionStorage.getItem("tokenContract") || ""
-                      const res = await fetch("http://127.0.0.1:5000/login", {
-                        method: "POST",
-                        headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify({
-                          email,
-                          password: pass,
-                          token_contract: token,
-                        }),
-                      })
-                      const data = await res.json()
-                      if (res.ok && data.accessToken) {
-                        sessionStorage.setItem("accessToken", data.accessToken)
-                        setShowRenewTokenToast(true)
-                        setTimeout(() => setShowRenewTokenToast(false), 2000)
-                      } else {
-                        alert(data.error || "No se pudo renovar el token")
-                      }
-                    } catch (err) {
-                      alert("No se pudo conectar con el backend")
-                    }
-                  }}
-                  onMouseOver={(e) => (e.currentTarget.style.background = "#b377f7")}
-                  onMouseOut={(e) => (e.currentTarget.style.background = "#c196ff")}
-                >
-                  Renovar token
-                </button>
-                <button
-                  style={{
                     background: "#5b009b",
                     color: "#fff",
                     border: "none",
