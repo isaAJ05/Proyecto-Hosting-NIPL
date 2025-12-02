@@ -1,43 +1,58 @@
-# HOST ME ;)
+# ❄️HOST ME ;)
+
+![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
+![Flask](https://img.shields.io/badge/Flask-000000?style=for-the-badge&logo=flask&logoColor=white)
+![React](https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react&logoColor=black)
+![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![Roble](https://img.shields.io/badge/Roble-000000?style=for-the-badge&logoColor=white)
+![Git](https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white)
+![Traefik](https://img.shields.io/badge/Traefik-24A1C1?style=for-the-badge&logo=traefikproxy&logoColor=white)
+---
 ### Proyecto realizado por:
 Isabella Arrieta, Natalia Carpintero, Roger Marenco, Paula Núñez y Luis Robles.
-# Enlace video de youtube
+
+## 🎥 Video de presentación
+📌 **YouTube:** https://www.youtube.com/watch?v=cM5YTzYSCn0
 
 ---
-# Templates dockerizados
-- **Sitio estático:** https://github.com/RogerMarenco/snake-main.git
-- **Aplicación React:** https://github.com/isaAJ05/react.git
-- **Flask con plantillas HTML:** https://github.com/isaAJ05/flask.git
----
-# Ejecución
+## 📁 Templates Dockerizados
 
-**Backend**
+| Tipo | Repositorio |
+|------|-------------|
+| **Sitio estático** | https://github.com/RogerMarenco/snake-main.git |
+| **Aplicación React** | https://github.com/isaAJ05/react.git |
+| **Flask con plantillas HTML** | https://github.com/isaAJ05/flask.git |
+
+---
+## 🚀 Ejecución del Proyecto
+
+**🟦 Backend**
 ```bash
 cd backend/app
 python server.py
 ```
 
-**Frontend**
+**🟩 Frontend**
 ```bash
 npm install
 npm run start
 ```
 
-**Proxy**
+**🟧 Proxy (Traefik)**
 ```bash
 docker network create traefik-net
 docker compose up -d
 docker network connect traefik-net proyecto_traefik
 ```
 
-**Docker** 
+**🐳 Docker (Despliegue completo)** 
 ```bash
 docker network create traefik-net
 docker compose up --build -d
 ```
 
 ---
-# Documento técnico
+## 📘 Documento Técnico
 Este proyecto implementa una **plataforma de hosting dinámico basada en contenedores Docker**, donde los usuarios pueden:
 
 - Autenticarse mediante JWT  
@@ -48,17 +63,17 @@ Este proyecto implementa una **plataforma de hosting dinámico basada en contene
 - Detener, iniciar o eliminar cada contenedor bajo demanda  
 ---
 
-## Arquitectura y Componentes del Sistema 
+## 🏗️ Arquitectura y Componentes del Sistema 
 
 La plataforma está compuesta por varios subsistemas que cooperan entre sí:
 
-**Frontend (React)**
+**🎨 Frontend (React)**
 - Interfaz de usuario intuitiva  
 - Autenticación  
 - Gestión de proyectos  
 - Acciones: iniciar, detener, abrir, reiniciar, eliminar  
 
-**Backend (Flask)**
+**🧠 Backend (Flask)**
 - API REST principal  
 - Gestión de contenedores con Docker 
 - Registro y persistencia de proyectos  
@@ -66,28 +81,28 @@ La plataforma está compuesta por varios subsistemas que cooperan entre sí:
 - Validación de usuarios  
 - Límites de recursos para cada contenedor  
 
-**Motor Docker**
+**🐳 Motor Docker**
 - Construcción de imágenes desde templates  
 - Ejecución y aislamiento completo por contenedor  
 - Configuración de CPU y memoria  
 - Gestión del ciclo de vida completo  
 
-**Reverse Proxy (Traefik)**
+**🌐 Reverse Proxy (Traefik)**
 - Redirección dinámica de subdominios  
 - Aislamiento de tráfico por contenedor  
 - Headers de seguridad y optimización  
 
-**Sistema de Monitoreo**
+**📡 Sistema de Monitoreo**
 - CPU, RAM, tiempo de actividad  
 - Estado de contenedores  
 - Última actividad  
 
-**Servicio de Autenticación**
+**🔐 Servicio de Autenticación**
 - Manejo de tokens JWT  
 - Validación en endpoints protegidos  
 - Sesiones seguras  
 
-**Gestor de Contenedores**
+**📦 Gestor de Contenedores**
 - Creación, arranque, apagado y eliminación  
 - Límite de CPU  
 - Límite de memoria  
@@ -95,7 +110,7 @@ La plataforma está compuesta por varios subsistemas que cooperan entre sí:
 - Subdominios únicos  
 - Asignación dinámica de puertos  
 
-**Templates Dockerizados**
+**🧩 Templates Dockerizados**
 
 Frameworks soportados:
 - React  
@@ -108,7 +123,7 @@ Cada template incluye:
 - Servidor interno  
 - Configuración lista para producción  
 
-**Base de datos**
+**🗄️ Base de datos**
 
 Archivo `projects.json` que almacena:
 - Proyectos  
@@ -118,7 +133,7 @@ Archivo `projects.json` que almacena:
 
 ---
 
-## Flujo de Trabajo del Sistema
+## 🔁 Flujo de Trabajo del Sistema
 
 **1. Autenticación**
 
@@ -146,7 +161,7 @@ Archivo `projects.json` que almacena:
 
 ---
 
-## Estrategias de Seguridad
+## 🔒Estrategias de Seguridad
 
 - Autenticación JWT con expiración.
 - Validaciones por petición mediante middleware.
@@ -158,7 +173,7 @@ Archivo `projects.json` que almacena:
 - Notificaciones de alerta ante comportamientos no autorizados.  
 ---
 
-## Optimización de Recursos
+## ⚙️ Optimización de Recursos
 La plataforma implementa múltiples estrategias para garantizar un uso eficiente de recursos del servidor, permitiendo alojar múltiples proyectos simultáneamente sin degradación del rendimiento
 
 - Uso de `nano_cpus` y `mem_limit` al crear contenedores.
@@ -166,16 +181,7 @@ La plataforma implementa múltiples estrategias para garantizar un uso eficiente
 - Apagado automático `idle` y limpieza periódica de archivos temporales y caché para liberar recursos.
 - Priorización de contenedores activos.
   
-**Límites clave**
-| Recurso | Límite |
-|---|---|
-| CPU | 2 cores |
-| RAM | 512 MB |
-| Almacenamiento | 5 GB |
-| API endpoints | 100 req/min |
-| Autenticación | 5 intentos / 15 min |
-| Creación proyectos | 3 proyectos / hora |
-| Inactividad max. | 30 minutos |
  
+
 
 
